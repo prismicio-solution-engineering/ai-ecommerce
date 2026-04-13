@@ -2,98 +2,98 @@
 
 ## Components
 
-### Header
-- variation: Default
+### Header ✅ done
+- variation: Default ✅
   - component: `components/relume/Header23.tsx`
-- variation: With Bottom Image 
+- variation: With Bottom Image ✅
   - component: `components/relume/Header26.tsx`
-- variation: Two Cols With Image
+- variation: Two Cols With Image ✅
   - components: image on the left `components/relume/Header19.tsx` & image on the right `components/relume/Header1.tsx` (use boolean)
   - comment: use a boolean field for the image side
-- variation: Two Cols With Full Size Image
+- variation: Two Cols With Full Size Image ✅
   - components: image on the left `components/relume/Header37.tsx` & image on the right `components/relume/Header36.tsx`
   - comment: Don't add the buttons, use a boolean field for the image side
-- variation: With Background Image
+- variation: With Background Image ✅
   - component: `components/relume/Header5.tsx`
 
-### FeaturedContent
-- variation: Default
+### FeaturedContent ✅ done
+- variation: Default ✅
   - component: `components/relume/Blog68.tsx`
-- variation: Content Relationship
+- variation: Content Relationship ✅
   - component: `components/relume/Blog68.tsx`
   - comment: use content relationships for linked articles
-- variation: Background Image Cards
+- variation: Background Image Cards ✅
   - component: `components/relume/Layout521.tsx`
   - comment: Always center the cards, minimum 1 card and maximum 4 cards per row, adapt the width of the cards to the available space like 2 cards `components/relume/Layout519.tsx` and 3 cards `components/relume/Layout520.tsx` all in 1 slice variation
 
-### CallToAction
-- variation: Default
+### CallToAction ✅ done
+- variation: Default ✅
   - component: `components/relume/Cta25.tsx`
   - comment: use a boolean for text align center or left
-- variation: With Background Image
+- variation: With Background Image ✅
   - component: `components/relume/Cta3.tsx`
   - comment: use a boolean for text align center or left
-- variation: With Background Color
+- variation: With Background Color ✅
   - component: `components/relume/Cta55.tsx`
   - comment: use a boolean for text align center or left
-- variation: Two Cols
+- variation: Two Cols ✅
   - component: `components/relume/Cta7.tsx`
-- variation: Two Cols Text and Image
+- variation: Two Cols Text and Image ✅
   - component: `components/relume/Cta1.tsx`
   - comment:use a boolean field for the image side
-- variation: Two Cols Featured Collection
+- variation: Two Cols Featured Collection ✅
   - components: image on the left `components/relume/Header37.tsx` & image on the right `components/relume/Header36.tsx`
   - comment: use a text field for collection reference use a boolean field for the image side, buttons are optionals and should not be displayed in not filled with content.
-- variation: Two Cols Featured Product
+- variation: Two Cols Featured Product ✅
   - components: image on the left `components/relume/Header37.tsx` & image on the right `components/relume/Header36.tsx`
   - comment: use a text field for product reference (will query the producat database and pull it's name and image) use a boolean field for the image side, buttons are optionals and should not be displayed in not filled with content.
-- variation: IF Two Cols Featured Collection
+- variation: IF Two Cols Featured Collection ✅
   - components: image on the left `components/relume/Header37.tsx` & image on the right `components/relume/Header36.tsx`
   - comment: use an integration field for collection reference use a boolean field for the image side, buttons are optionals and should not be displayed in not filled with content.
-- variation: IF Two Cols Featured Product
+- variation: IF Two Cols Featured Product ✅
   - components: image on the left `components/relume/Header37.tsx` & image on the right `components/relume/Header36.tsx`
   - comment: use an integration field for product reference (will query the producat database and pull it's name and image) use a boolean field for the image side, buttons are optionals and should not be displayed in not filled with content.
 
-### ProductList
-- variation: Carrousel 4 Cols
+### ProductList ✅ done
+- variation: Carrousel 4 Cols ✅
   - component: `components/relume/Product5.tsx`
-- variation: Carrousel 3 Cols
+- variation: Carrousel 3 Cols ✅
   - component: `components/relume/Product11.tsx`
-- variation: Grid 4 Cols
+- variation: Grid 4 Cols ✅
   - component: `components/relume/Product1.tsx`
-- variation: Grid 3 Cols
+- variation: Grid 3 Cols ✅
   - component: `components/relume/Product7.tsx`
 
-### EditorialContent
-- variation: Default Rich Text
+### EditorialContent ✅ done
+- variation: Default Rich Text ✅
   - component: `components/relume/Content29.tsx`
   - comment: Use a RichText, don't add quote. Based on the formating options of `components/relume/Content27.tsx` and ommiting the table of content, create a global RichText component following this documentation https://prismic.io/docs/fields/rich-text#use-custom-ui-components-globally
-- variation: Two Cols Text and Image
+- variation: Two Cols Text and Image ✅
   - components: image on the left `components/relume/Content2.tsx` & image on the right `components/relume/Content1.tsx`
   - comment: use a boolean field for the image side
-- variation: Two Cols With Full Size Image
+- variation: Two Cols With Full Size Image ✅
   - components: image on the left `components/relume/Header37.tsx` & image on the right `components/relume/Header36.tsx`
   - comment: use a boolean field for the image side, buttons are optionals and should not be displayed in not filled with content.
-- variation: Quote
+- variation: Quote ✅
   - component: `components/relume/Content29.tsx`
   - comment: use the quote part of the component
-- variation: Two Cols Image and text
+- variation: Two Cols Image and text ✅
   - components: `components/relume/Layout3.tsx`
   - comment: use a boolean field for the image side
 
-### Media
-- variation: Image
+### Media ✅ done
+- variation: Image ✅
   - component: `components/relume/Content29.tsx`
   - comment: Use the image and add a caption under it using an image field and a rich text field, ommit the rest of the component. If caption is not filled, don't display it
-- variation: Video
+- variation: Video ✅
   - component: `components/relume/Content29.tsx`
   - comment: Use the image example but for a video and add a caption under it using an embed field and a rich text field, ommit the rest of the component. If caption is not filled, don't display it
 
-### ImageGallery
-- variation: Two Cols
+### ImageGallery ✅ done
+- variation: Two Cols ✅
   - component: `components/relume/Gallery2.tsx`
   - comment: if caption is not filled, don't display it
-- variation: Three Cols
+- variation: Three Cols ✅
   - component: `components/relume/Gallery3.tsx`
   - comment: if caption is not filled, don't display it
 

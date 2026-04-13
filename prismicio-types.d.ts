@@ -69,6 +69,188 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type ArticleDocumentDataSlicesSlice =
+  | CallToActionSlice
+  | FeaturedContentSlice
+  | ImageGallerySlice
+  | ProductListSlice
+  | EditorialContentSlice
+  | MediaSlice;
+
+/**
+ * Content for Article documents
+ */
+interface ArticleDocumentData {
+  /**
+   * Category field in *Article*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  category: ContentRelationshipFieldWithData<
+    [{ id: "article_category"; fields: ["category_name"] }]
+  >;
+
+  /**
+   * Slice Zone field in *Article*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<ArticleDocumentDataSlicesSlice> /**
+   * Meta Title field in *Article*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: article.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Article*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: article.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Article*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Article document from Prismic
+ *
+ * - **API ID**: `article`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ArticleDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ArticleDocumentData>,
+    "article",
+    Lang
+  >;
+
+/**
+ * Content for Article category documents
+ */
+interface ArticleCategoryDocumentData {
+  /**
+   * Category name field in *Article category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article_category.category_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  category_name: prismic.KeyTextField;
+}
+
+/**
+ * Article category document from Prismic
+ *
+ * - **API ID**: `article_category`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ArticleCategoryDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ArticleCategoryDocumentData>,
+    "article_category",
+    Lang
+  >;
+
+type HomeDocumentDataSlicesSlice =
+  | FeaturedContentSlice
+  | ProductListSlice
+  | EditorialContentSlice
+  | CallToActionSlice
+  | HeaderSlice;
+
+/**
+ * Content for Home documents
+ */
+interface HomeDocumentData {
+  /**
+   * Slice Zone field in *Home*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<HomeDocumentDataSlicesSlice> /**
+   * Meta Title field in *Home*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: home.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Home*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: home.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Home*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Home document from Prismic
+ *
+ * - **API ID**: `home`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type HomeDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
+
 type PageDocumentDataSlicesSlice = never;
 
 /**
@@ -97,7 +279,7 @@ interface PageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>; /**
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
    * Meta Title field in *Page*
    *
    * - **Field Type**: Text
@@ -105,7 +287,7 @@ interface PageDocumentData {
    * - **API ID Path**: page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */
+   */;
   meta_title: prismic.KeyTextField;
 
   /**
@@ -175,7 +357,2573 @@ export type PageCategoryDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = PageDocument | PageCategoryDocument;
+export type AllDocumentTypes =
+  | ArticleDocument
+  | ArticleCategoryDocument
+  | HomeDocument
+  | PageDocument
+  | PageCategoryDocument;
+
+/**
+ * Primary content in *CallToAction → Default → Primary*
+ */
+export interface CallToActionSliceDefaultPrimary {
+  /**
+   * Heading field in *CallToAction → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.default.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Center text field in *CallToAction → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.default.primary.center_text
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  center_text: prismic.BooleanField;
+}
+
+/**
+ * Default variation for CallToAction Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Centered or left-aligned CTA with heading, description, and buttons
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CallToActionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *CallToAction → With Background Image → Primary*
+ */
+export interface CallToActionSliceWithBackgroundImagePrimary {
+  /**
+   * Heading field in *CallToAction → With Background Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.withBackgroundImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → With Background Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.withBackgroundImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → With Background Image → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.withBackgroundImage.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Background Image field in *CallToAction → With Background Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.withBackgroundImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Center text field in *CallToAction → With Background Image → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.withBackgroundImage.primary.center_text
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  center_text: prismic.BooleanField;
+}
+
+/**
+ * With Background Image variation for CallToAction Slice
+ *
+ * - **API ID**: `withBackgroundImage`
+ * - **Description**: CTA with full background image and overlay
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceWithBackgroundImage = prismic.SharedSliceVariation<
+  "withBackgroundImage",
+  Simplify<CallToActionSliceWithBackgroundImagePrimary>,
+  never
+>;
+
+/**
+ * Primary content in *CallToAction → With Background Color → Primary*
+ */
+export interface CallToActionSliceWithBackgroundColorPrimary {
+  /**
+   * Heading field in *CallToAction → With Background Color → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.withBackgroundColor.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → With Background Color → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.withBackgroundColor.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → With Background Color → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.withBackgroundColor.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Background Color field in *CallToAction → With Background Color → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.withBackgroundColor.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  background_color: prismic.ColorField;
+
+  /**
+   * Center text field in *CallToAction → With Background Color → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.withBackgroundColor.primary.center_text
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  center_text: prismic.BooleanField;
+}
+
+/**
+ * With Background Color variation for CallToAction Slice
+ *
+ * - **API ID**: `withBackgroundColor`
+ * - **Description**: CTA with colored background container
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceWithBackgroundColor = prismic.SharedSliceVariation<
+  "withBackgroundColor",
+  Simplify<CallToActionSliceWithBackgroundColorPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *CallToAction → Two Cols → Primary*
+ */
+export interface CallToActionSliceTwoColsPrimary {
+  /**
+   * Heading field in *CallToAction → Two Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.twoCols.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → Two Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.twoCols.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → Two Cols → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoCols.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+}
+
+/**
+ * Two Cols variation for CallToAction Slice
+ *
+ * - **API ID**: `twoCols`
+ * - **Description**: Two-column CTA with heading/description on left, buttons on right
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceTwoCols = prismic.SharedSliceVariation<
+  "twoCols",
+  Simplify<CallToActionSliceTwoColsPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *CallToAction → Two Cols Text and Image → Primary*
+ */
+export interface CallToActionSliceTwoColsTextAndImagePrimary {
+  /**
+   * Heading field in *CallToAction → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.twoColsTextAndImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.twoColsTextAndImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsTextAndImage.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *CallToAction → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsTextAndImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image on left field in *CallToAction → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsTextAndImage.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols Text and Image variation for CallToAction Slice
+ *
+ * - **API ID**: `twoColsTextAndImage`
+ * - **Description**: Two-column CTA with text on one side and image on the other
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceTwoColsTextAndImage = prismic.SharedSliceVariation<
+  "twoColsTextAndImage",
+  Simplify<CallToActionSliceTwoColsTextAndImagePrimary>,
+  never
+>;
+
+/**
+ * Primary content in *CallToAction → Two Cols Featured Collection → Primary*
+ */
+export interface CallToActionSliceTwoColsFeaturedCollectionPrimary {
+  /**
+   * Heading field in *CallToAction → Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.twoColsFeaturedCollection.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.twoColsFeaturedCollection.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsFeaturedCollection.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *CallToAction → Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsFeaturedCollection.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Collection Reference field in *CallToAction → Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Collection handle
+   * - **API ID Path**: call_to_action.twoColsFeaturedCollection.primary.collection_reference
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  collection_reference: prismic.KeyTextField;
+
+  /**
+   * Image on left field in *CallToAction → Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsFeaturedCollection.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols Featured Collection variation for CallToAction Slice
+ *
+ * - **API ID**: `twoColsFeaturedCollection`
+ * - **Description**: Two-column with collection text reference and full-size image
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceTwoColsFeaturedCollection =
+  prismic.SharedSliceVariation<
+    "twoColsFeaturedCollection",
+    Simplify<CallToActionSliceTwoColsFeaturedCollectionPrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *CallToAction → Two Cols Featured Product → Primary*
+ */
+export interface CallToActionSliceTwoColsFeaturedProductPrimary {
+  /**
+   * Heading field in *CallToAction → Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.twoColsFeaturedProduct.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.twoColsFeaturedProduct.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsFeaturedProduct.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *CallToAction → Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsFeaturedProduct.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Product Reference field in *CallToAction → Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Product handle
+   * - **API ID Path**: call_to_action.twoColsFeaturedProduct.primary.product_reference
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  product_reference: prismic.KeyTextField;
+
+  /**
+   * Image on left field in *CallToAction → Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.twoColsFeaturedProduct.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols Featured Product variation for CallToAction Slice
+ *
+ * - **API ID**: `twoColsFeaturedProduct`
+ * - **Description**: Two-column with product text reference and full-size image
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceTwoColsFeaturedProduct =
+  prismic.SharedSliceVariation<
+    "twoColsFeaturedProduct",
+    Simplify<CallToActionSliceTwoColsFeaturedProductPrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *CallToAction → IF Two Cols Featured Collection → Primary*
+ */
+export interface CallToActionSliceIfTwoColsFeaturedCollectionPrimary {
+  /**
+   * Heading field in *CallToAction → IF Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedCollection.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → IF Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedCollection.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → IF Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedCollection.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *CallToAction → IF Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedCollection.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Collection field in *CallToAction → IF Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Integration Fields (Catalog: `collection`)
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedCollection.primary.collection
+   * - **Documentation**: https://prismic.io/docs/fields/integration
+   */
+  collection: prismic.IntegrationField;
+
+  /**
+   * Image on left field in *CallToAction → IF Two Cols Featured Collection → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedCollection.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * IF Two Cols Featured Collection variation for CallToAction Slice
+ *
+ * - **API ID**: `ifTwoColsFeaturedCollection`
+ * - **Description**: Two-column with collection integration field and full-size image
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceIfTwoColsFeaturedCollection =
+  prismic.SharedSliceVariation<
+    "ifTwoColsFeaturedCollection",
+    Simplify<CallToActionSliceIfTwoColsFeaturedCollectionPrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *CallToAction → IF Two Cols Featured Product → Primary*
+ */
+export interface CallToActionSliceIfTwoColsFeaturedProductPrimary {
+  /**
+   * Heading field in *CallToAction → IF Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedProduct.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *CallToAction → IF Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedProduct.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *CallToAction → IF Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedProduct.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *CallToAction → IF Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedProduct.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Product field in *CallToAction → IF Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Integration Fields (Catalog: `product`)
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedProduct.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/integration
+   */
+  product: prismic.IntegrationField;
+
+  /**
+   * Image on left field in *CallToAction → IF Two Cols Featured Product → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ifTwoColsFeaturedProduct.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * IF Two Cols Featured Product variation for CallToAction Slice
+ *
+ * - **API ID**: `ifTwoColsFeaturedProduct`
+ * - **Description**: Two-column with product integration field and full-size image
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceIfTwoColsFeaturedProduct =
+  prismic.SharedSliceVariation<
+    "ifTwoColsFeaturedProduct",
+    Simplify<CallToActionSliceIfTwoColsFeaturedProductPrimary>,
+    never
+  >;
+
+/**
+ * Slice variation for *CallToAction*
+ */
+type CallToActionSliceVariation =
+  | CallToActionSliceDefault
+  | CallToActionSliceWithBackgroundImage
+  | CallToActionSliceWithBackgroundColor
+  | CallToActionSliceTwoCols
+  | CallToActionSliceTwoColsTextAndImage
+  | CallToActionSliceTwoColsFeaturedCollection
+  | CallToActionSliceTwoColsFeaturedProduct
+  | CallToActionSliceIfTwoColsFeaturedCollection
+  | CallToActionSliceIfTwoColsFeaturedProduct;
+
+/**
+ * CallToAction Shared Slice
+ *
+ * - **API ID**: `call_to_action`
+ * - **Description**: Call-to-action sections with multiple layout options
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSlice = prismic.SharedSlice<
+  "call_to_action",
+  CallToActionSliceVariation
+>;
+
+/**
+ * Primary content in *EditorialContent → Default Rich Text → Primary*
+ */
+export interface EditorialContentSliceDefaultPrimary {
+  /**
+   * Content field in *EditorialContent → Default Rich Text → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter content
+   * - **API ID Path**: editorial_content.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default Rich Text variation for EditorialContent Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Full-width rich text content block
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EditorialContentSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EditorialContentSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *EditorialContent → Two Cols Text and Image → Primary*
+ */
+export interface EditorialContentSliceTwoColsTextAndImagePrimary {
+  /**
+   * Heading field in *EditorialContent → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: editorial_content.twoColsTextAndImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Content field in *EditorialContent → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter content
+   * - **API ID Path**: editorial_content.twoColsTextAndImage.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Image field in *EditorialContent → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsTextAndImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image on left field in *EditorialContent → Two Cols Text and Image → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsTextAndImage.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols Text and Image variation for EditorialContent Slice
+ *
+ * - **API ID**: `twoColsTextAndImage`
+ * - **Description**: Two columns with rich text and image, switchable sides
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EditorialContentSliceTwoColsTextAndImage =
+  prismic.SharedSliceVariation<
+    "twoColsTextAndImage",
+    Simplify<EditorialContentSliceTwoColsTextAndImagePrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *EditorialContent → Two Cols With Full Size Image → Primary*
+ */
+export interface EditorialContentSliceTwoColsWithFullSizeImagePrimary {
+  /**
+   * Heading field in *EditorialContent → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: editorial_content.twoColsWithFullSizeImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *EditorialContent → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: editorial_content.twoColsWithFullSizeImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *EditorialContent → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsWithFullSizeImage.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *EditorialContent → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsWithFullSizeImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image on left field in *EditorialContent → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsWithFullSizeImage.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols With Full Size Image variation for EditorialContent Slice
+ *
+ * - **API ID**: `twoColsWithFullSizeImage`
+ * - **Description**: Two columns with full-height image, optional buttons
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EditorialContentSliceTwoColsWithFullSizeImage =
+  prismic.SharedSliceVariation<
+    "twoColsWithFullSizeImage",
+    Simplify<EditorialContentSliceTwoColsWithFullSizeImagePrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *EditorialContent → Quote → Primary*
+ */
+export interface EditorialContentSliceQuotePrimary {
+  /**
+   * Quote field in *EditorialContent → Quote → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter quote
+   * - **API ID Path**: editorial_content.quote.primary.quote
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Author Name field in *EditorialContent → Quote → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Full name
+   * - **API ID Path**: editorial_content.quote.primary.author_name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  author_name: prismic.KeyTextField;
+
+  /**
+   * Author Title field in *EditorialContent → Quote → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Job title, Company
+   * - **API ID Path**: editorial_content.quote.primary.author_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  author_title: prismic.KeyTextField;
+
+  /**
+   * Author Image field in *EditorialContent → Quote → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.quote.primary.author_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  author_image: prismic.ImageField<never>;
+}
+
+/**
+ * Quote variation for EditorialContent Slice
+ *
+ * - **API ID**: `quote`
+ * - **Description**: Blockquote with attribution
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EditorialContentSliceQuote = prismic.SharedSliceVariation<
+  "quote",
+  Simplify<EditorialContentSliceQuotePrimary>,
+  never
+>;
+
+/**
+ * Primary content in *EditorialContent → Two Cols Image and Text → Primary*
+ */
+export interface EditorialContentSliceTwoColsImageAndTextPrimary {
+  /**
+   * Heading field in *EditorialContent → Two Cols Image and Text → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: editorial_content.twoColsImageAndText.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *EditorialContent → Two Cols Image and Text → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: editorial_content.twoColsImageAndText.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Image field in *EditorialContent → Two Cols Image and Text → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsImageAndText.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image on left field in *EditorialContent → Two Cols Image and Text → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsImageAndText.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols Image and Text variation for EditorialContent Slice
+ *
+ * - **API ID**: `twoColsImageAndText`
+ * - **Description**: Two columns with heading, description, and image
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EditorialContentSliceTwoColsImageAndText =
+  prismic.SharedSliceVariation<
+    "twoColsImageAndText",
+    Simplify<EditorialContentSliceTwoColsImageAndTextPrimary>,
+    never
+  >;
+
+/**
+ * Slice variation for *EditorialContent*
+ */
+type EditorialContentSliceVariation =
+  | EditorialContentSliceDefault
+  | EditorialContentSliceTwoColsTextAndImage
+  | EditorialContentSliceTwoColsWithFullSizeImage
+  | EditorialContentSliceQuote
+  | EditorialContentSliceTwoColsImageAndText;
+
+/**
+ * EditorialContent Shared Slice
+ *
+ * - **API ID**: `editorial_content`
+ * - **Description**: Editorial content sections with rich text, images, and quotes
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EditorialContentSlice = prismic.SharedSlice<
+  "editorial_content",
+  EditorialContentSliceVariation
+>;
+
+/**
+ * Item in *FeaturedContent → Default → Primary → Cards*
+ */
+export interface FeaturedContentSliceDefaultPrimaryCardsItem {
+  /**
+   * Image field in *FeaturedContent → Default → Primary → Cards*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.default.primary.cards[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Category field in *FeaturedContent → Default → Primary → Cards*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Category
+   * - **API ID Path**: featured_content.default.primary.cards[].category
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  category: prismic.KeyTextField;
+
+  /**
+   * Read Time field in *FeaturedContent → Default → Primary → Cards*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: 5 min read
+   * - **API ID Path**: featured_content.default.primary.cards[].read_time
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  read_time: prismic.KeyTextField;
+
+  /**
+   * Title field in *FeaturedContent → Default → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Card title
+   * - **API ID Path**: featured_content.default.primary.cards[].title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Description field in *FeaturedContent → Default → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Card description
+   * - **API ID Path**: featured_content.default.primary.cards[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *FeaturedContent → Default → Primary → Cards*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.default.primary.cards[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *FeaturedContent → Content Relationship → Primary → Articles*
+ */
+export interface FeaturedContentSliceContentRelationshipPrimaryArticlesItem {
+  /**
+   * Article field in *FeaturedContent → Content Relationship → Primary → Articles*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.contentRelationship.primary.articles[].article
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  article: prismic.ContentRelationshipField;
+}
+
+/**
+ * Item in *FeaturedContent → Background Image Cards → Primary → Cards*
+ */
+export interface FeaturedContentSliceBackgroundImageCardsPrimaryCardsItem {
+  /**
+   * Background Image field in *FeaturedContent → Background Image Cards → Primary → Cards*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.cards[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Icon field in *FeaturedContent → Background Image Cards → Primary → Cards*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.cards[].icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Title field in *FeaturedContent → Background Image Cards → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Card title
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.cards[].title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Description field in *FeaturedContent → Background Image Cards → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Card description
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.cards[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *FeaturedContent → Background Image Cards → Primary → Cards*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.cards[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *FeaturedContent → Default → Primary*
+ */
+export interface FeaturedContentSliceDefaultPrimary {
+  /**
+   * Tagline field in *FeaturedContent → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter tagline
+   * - **API ID Path**: featured_content.default.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Heading field in *FeaturedContent → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: featured_content.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *FeaturedContent → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: featured_content.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * View All Link field in *FeaturedContent → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.default.primary.view_all_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  view_all_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Cards field in *FeaturedContent → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.default.primary.cards[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  cards: prismic.GroupField<
+    Simplify<FeaturedContentSliceDefaultPrimaryCardsItem>
+  >;
+}
+
+/**
+ * Default variation for FeaturedContent Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Carousel of featured cards with tagline, heading, and description
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeaturedContentSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FeaturedContentSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *FeaturedContent → Content Relationship → Primary*
+ */
+export interface FeaturedContentSliceContentRelationshipPrimary {
+  /**
+   * Tagline field in *FeaturedContent → Content Relationship → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter tagline
+   * - **API ID Path**: featured_content.contentRelationship.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Heading field in *FeaturedContent → Content Relationship → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: featured_content.contentRelationship.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *FeaturedContent → Content Relationship → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: featured_content.contentRelationship.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * View All Link field in *FeaturedContent → Content Relationship → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.contentRelationship.primary.view_all_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  view_all_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Articles field in *FeaturedContent → Content Relationship → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.contentRelationship.primary.articles[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  articles: prismic.GroupField<
+    Simplify<FeaturedContentSliceContentRelationshipPrimaryArticlesItem>
+  >;
+}
+
+/**
+ * Content Relationship variation for FeaturedContent Slice
+ *
+ * - **API ID**: `contentRelationship`
+ * - **Description**: Carousel of cards populated via content relationships
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeaturedContentSliceContentRelationship =
+  prismic.SharedSliceVariation<
+    "contentRelationship",
+    Simplify<FeaturedContentSliceContentRelationshipPrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *FeaturedContent → Background Image Cards → Primary*
+ */
+export interface FeaturedContentSliceBackgroundImageCardsPrimary {
+  /**
+   * Tagline field in *FeaturedContent → Background Image Cards → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter tagline
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Heading field in *FeaturedContent → Background Image Cards → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *FeaturedContent → Background Image Cards → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Cards field in *FeaturedContent → Background Image Cards → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_content.backgroundImageCards.primary.cards[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  cards: prismic.GroupField<
+    Simplify<FeaturedContentSliceBackgroundImageCardsPrimaryCardsItem>
+  >;
+}
+
+/**
+ * Background Image Cards variation for FeaturedContent Slice
+ *
+ * - **API ID**: `backgroundImageCards`
+ * - **Description**: Grid of cards with background images, auto-adapting 1-4 columns
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeaturedContentSliceBackgroundImageCards =
+  prismic.SharedSliceVariation<
+    "backgroundImageCards",
+    Simplify<FeaturedContentSliceBackgroundImageCardsPrimary>,
+    never
+  >;
+
+/**
+ * Slice variation for *FeaturedContent*
+ */
+type FeaturedContentSliceVariation =
+  | FeaturedContentSliceDefault
+  | FeaturedContentSliceContentRelationship
+  | FeaturedContentSliceBackgroundImageCards;
+
+/**
+ * FeaturedContent Shared Slice
+ *
+ * - **API ID**: `featured_content`
+ * - **Description**: Featured content carousel and card layouts
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeaturedContentSlice = prismic.SharedSlice<
+  "featured_content",
+  FeaturedContentSliceVariation
+>;
+
+/**
+ * Primary content in *Header → Default → Primary*
+ */
+export interface HeaderSliceDefaultPrimary {
+  /**
+   * Heading field in *Header → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: header.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *Header → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: header.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *Header → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.default.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+}
+
+/**
+ * Default variation for Header Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Centered text with heading, description, and CTA buttons
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeaderSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeaderSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Header → With Bottom Image → Primary*
+ */
+export interface HeaderSliceWithBottomImagePrimary {
+  /**
+   * Heading field in *Header → With Bottom Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: header.withBottomImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *Header → With Bottom Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: header.withBottomImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *Header → With Bottom Image → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.withBottomImage.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *Header → With Bottom Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.withBottomImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * With Bottom Image variation for Header Slice
+ *
+ * - **API ID**: `withBottomImage`
+ * - **Description**: Centered text with an image below
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeaderSliceWithBottomImage = prismic.SharedSliceVariation<
+  "withBottomImage",
+  Simplify<HeaderSliceWithBottomImagePrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Header → Two Cols With Image → Primary*
+ */
+export interface HeaderSliceTwoColsWithImagePrimary {
+  /**
+   * Heading field in *Header → Two Cols With Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: header.twoColsWithImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *Header → Two Cols With Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: header.twoColsWithImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *Header → Two Cols With Image → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.twoColsWithImage.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Image field in *Header → Two Cols With Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.twoColsWithImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image on left field in *Header → Two Cols With Image → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.twoColsWithImage.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols With Image variation for Header Slice
+ *
+ * - **API ID**: `twoColsWithImage`
+ * - **Description**: Two columns with text and image, switchable sides
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeaderSliceTwoColsWithImage = prismic.SharedSliceVariation<
+  "twoColsWithImage",
+  Simplify<HeaderSliceTwoColsWithImagePrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Header → Two Cols With Full Size Image → Primary*
+ */
+export interface HeaderSliceTwoColsWithFullSizeImagePrimary {
+  /**
+   * Heading field in *Header → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: header.twoColsWithFullSizeImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *Header → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: header.twoColsWithFullSizeImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Image field in *Header → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.twoColsWithFullSizeImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image on left field in *Header → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.twoColsWithFullSizeImage.primary.image_left
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Two Cols With Full Size Image variation for Header Slice
+ *
+ * - **API ID**: `twoColsWithFullSizeImage`
+ * - **Description**: Edge-to-edge two columns with full-height image, no buttons
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeaderSliceTwoColsWithFullSizeImage = prismic.SharedSliceVariation<
+  "twoColsWithFullSizeImage",
+  Simplify<HeaderSliceTwoColsWithFullSizeImagePrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Header → With Background Image → Primary*
+ */
+export interface HeaderSliceWithBackgroundImagePrimary {
+  /**
+   * Heading field in *Header → With Background Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: header.withBackgroundImage.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *Header → With Background Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: header.withBackgroundImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Buttons field in *Header → With Background Image → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.withBackgroundImage.primary.buttons
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Background Image field in *Header → With Background Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.withBackgroundImage.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * With Background Image variation for Header Slice
+ *
+ * - **API ID**: `withBackgroundImage`
+ * - **Description**: Full background image with overlay, text and buttons on top
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeaderSliceWithBackgroundImage = prismic.SharedSliceVariation<
+  "withBackgroundImage",
+  Simplify<HeaderSliceWithBackgroundImagePrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Header*
+ */
+type HeaderSliceVariation =
+  | HeaderSliceDefault
+  | HeaderSliceWithBottomImage
+  | HeaderSliceTwoColsWithImage
+  | HeaderSliceTwoColsWithFullSizeImage
+  | HeaderSliceWithBackgroundImage;
+
+/**
+ * Header Shared Slice
+ *
+ * - **API ID**: `header`
+ * - **Description**: Hero header with multiple layout variations
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeaderSlice = prismic.SharedSlice<"header", HeaderSliceVariation>;
+
+/**
+ * Item in *ImageGallery → Two Cols → Primary → Images*
+ */
+export interface ImageGallerySliceDefaultPrimaryImagesItem {
+  /**
+   * Image field in *ImageGallery → Two Cols → Primary → Images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.default.primary.images[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *ImageGallery → Two Cols → Primary → Images*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Optional caption
+   * - **API ID Path**: image_gallery.default.primary.images[].caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  caption: prismic.RichTextField;
+
+  /**
+   * Link field in *ImageGallery → Two Cols → Primary → Images*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.default.primary.images[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *ImageGallery → Three Cols → Primary → Images*
+ */
+export interface ImageGallerySliceThreeColsPrimaryImagesItem {
+  /**
+   * Image field in *ImageGallery → Three Cols → Primary → Images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.threeCols.primary.images[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *ImageGallery → Three Cols → Primary → Images*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Optional caption
+   * - **API ID Path**: image_gallery.threeCols.primary.images[].caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  caption: prismic.RichTextField;
+
+  /**
+   * Link field in *ImageGallery → Three Cols → Primary → Images*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.threeCols.primary.images[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *ImageGallery → Two Cols → Primary*
+ */
+export interface ImageGallerySliceDefaultPrimary {
+  /**
+   * Heading field in *ImageGallery → Two Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: image_gallery.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *ImageGallery → Two Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: image_gallery.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Images field in *ImageGallery → Two Cols → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.default.primary.images[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  images: prismic.GroupField<
+    Simplify<ImageGallerySliceDefaultPrimaryImagesItem>
+  >;
+}
+
+/**
+ * Two Cols variation for ImageGallery Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Two-column image gallery with optional captions
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageGallerySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageGallerySliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ImageGallery → Three Cols → Primary*
+ */
+export interface ImageGallerySliceThreeColsPrimary {
+  /**
+   * Heading field in *ImageGallery → Three Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: image_gallery.threeCols.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *ImageGallery → Three Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: image_gallery.threeCols.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Images field in *ImageGallery → Three Cols → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.threeCols.primary.images[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  images: prismic.GroupField<
+    Simplify<ImageGallerySliceThreeColsPrimaryImagesItem>
+  >;
+}
+
+/**
+ * Three Cols variation for ImageGallery Slice
+ *
+ * - **API ID**: `threeCols`
+ * - **Description**: Three-column image gallery with optional captions
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageGallerySliceThreeCols = prismic.SharedSliceVariation<
+  "threeCols",
+  Simplify<ImageGallerySliceThreeColsPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageGallery*
+ */
+type ImageGallerySliceVariation =
+  | ImageGallerySliceDefault
+  | ImageGallerySliceThreeCols;
+
+/**
+ * ImageGallery Shared Slice
+ *
+ * - **API ID**: `image_gallery`
+ * - **Description**: Image gallery in 2 or 3 column grid
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageGallerySlice = prismic.SharedSlice<
+  "image_gallery",
+  ImageGallerySliceVariation
+>;
+
+/**
+ * Primary content in *Media → Image → Primary*
+ */
+export interface MediaSliceDefaultPrimary {
+  /**
+   * Image field in *Media → Image → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *Media → Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Optional caption
+   * - **API ID Path**: media.default.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  caption: prismic.RichTextField;
+}
+
+/**
+ * Image variation for Media Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Single image with optional caption
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MediaSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MediaSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Media → Video → Primary*
+ */
+export interface MediaSliceVideoPrimary {
+  /**
+   * Video field in *Media → Video → Primary*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media.video.primary.video
+   * - **Documentation**: https://prismic.io/docs/fields/embed
+   */
+  video: prismic.EmbedField;
+
+  /**
+   * Caption field in *Media → Video → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Optional caption
+   * - **API ID Path**: media.video.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  caption: prismic.RichTextField;
+}
+
+/**
+ * Video variation for Media Slice
+ *
+ * - **API ID**: `video`
+ * - **Description**: Embedded video with optional caption
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MediaSliceVideo = prismic.SharedSliceVariation<
+  "video",
+  Simplify<MediaSliceVideoPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Media*
+ */
+type MediaSliceVariation = MediaSliceDefault | MediaSliceVideo;
+
+/**
+ * Media Shared Slice
+ *
+ * - **API ID**: `media`
+ * - **Description**: Image or video media block with optional caption
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MediaSlice = prismic.SharedSlice<"media", MediaSliceVariation>;
+
+/**
+ * Item in *ProductList → Carousel 4 Cols → Primary → Products*
+ */
+export interface ProductListSliceDefaultPrimaryProductsItem {
+  /**
+   * Image field in *ProductList → Carousel 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.default.primary.products[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *ProductList → Carousel 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Product name
+   * - **API ID Path**: product_list.default.primary.products[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Variant field in *ProductList → Carousel 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Variant
+   * - **API ID Path**: product_list.default.primary.products[].variant
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  variant: prismic.KeyTextField;
+
+  /**
+   * Price field in *ProductList → Carousel 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: $55
+   * - **API ID Path**: product_list.default.primary.products[].price
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  price: prismic.KeyTextField;
+
+  /**
+   * Link field in *ProductList → Carousel 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.default.primary.products[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *ProductList → Carousel 3 Cols → Primary → Products*
+ */
+export interface ProductListSliceCarousel3ColsPrimaryProductsItem {
+  /**
+   * Image field in *ProductList → Carousel 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.carousel3Cols.primary.products[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *ProductList → Carousel 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Product name
+   * - **API ID Path**: product_list.carousel3Cols.primary.products[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Variant field in *ProductList → Carousel 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Variant
+   * - **API ID Path**: product_list.carousel3Cols.primary.products[].variant
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  variant: prismic.KeyTextField;
+
+  /**
+   * Price field in *ProductList → Carousel 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: $55
+   * - **API ID Path**: product_list.carousel3Cols.primary.products[].price
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  price: prismic.KeyTextField;
+
+  /**
+   * Link field in *ProductList → Carousel 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.carousel3Cols.primary.products[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *ProductList → Grid 4 Cols → Primary → Products*
+ */
+export interface ProductListSliceGrid4ColsPrimaryProductsItem {
+  /**
+   * Image field in *ProductList → Grid 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid4Cols.primary.products[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *ProductList → Grid 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Product name
+   * - **API ID Path**: product_list.grid4Cols.primary.products[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Variant field in *ProductList → Grid 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Variant
+   * - **API ID Path**: product_list.grid4Cols.primary.products[].variant
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  variant: prismic.KeyTextField;
+
+  /**
+   * Price field in *ProductList → Grid 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: $55
+   * - **API ID Path**: product_list.grid4Cols.primary.products[].price
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  price: prismic.KeyTextField;
+
+  /**
+   * Link field in *ProductList → Grid 4 Cols → Primary → Products*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid4Cols.primary.products[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *ProductList → Grid 3 Cols → Primary → Products*
+ */
+export interface ProductListSliceGrid3ColsPrimaryProductsItem {
+  /**
+   * Image field in *ProductList → Grid 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid3Cols.primary.products[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *ProductList → Grid 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Product name
+   * - **API ID Path**: product_list.grid3Cols.primary.products[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Variant field in *ProductList → Grid 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Variant
+   * - **API ID Path**: product_list.grid3Cols.primary.products[].variant
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  variant: prismic.KeyTextField;
+
+  /**
+   * Price field in *ProductList → Grid 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: $55
+   * - **API ID Path**: product_list.grid3Cols.primary.products[].price
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  price: prismic.KeyTextField;
+
+  /**
+   * Link field in *ProductList → Grid 3 Cols → Primary → Products*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid3Cols.primary.products[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *ProductList → Carousel 4 Cols → Primary*
+ */
+export interface ProductListSliceDefaultPrimary {
+  /**
+   * Tagline field in *ProductList → Carousel 4 Cols → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter tagline
+   * - **API ID Path**: product_list.default.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Heading field in *ProductList → Carousel 4 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: product_list.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *ProductList → Carousel 4 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: product_list.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * View All Link field in *ProductList → Carousel 4 Cols → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.default.primary.view_all_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  view_all_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Products field in *ProductList → Carousel 4 Cols → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.default.primary.products[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  products: prismic.GroupField<
+    Simplify<ProductListSliceDefaultPrimaryProductsItem>
+  >;
+}
+
+/**
+ * Carousel 4 Cols variation for ProductList Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Product carousel with 4-column basis
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProductListSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProductListSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ProductList → Carousel 3 Cols → Primary*
+ */
+export interface ProductListSliceCarousel3ColsPrimary {
+  /**
+   * Tagline field in *ProductList → Carousel 3 Cols → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter tagline
+   * - **API ID Path**: product_list.carousel3Cols.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Heading field in *ProductList → Carousel 3 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: product_list.carousel3Cols.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *ProductList → Carousel 3 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: product_list.carousel3Cols.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * View All Link field in *ProductList → Carousel 3 Cols → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.carousel3Cols.primary.view_all_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  view_all_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Products field in *ProductList → Carousel 3 Cols → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.carousel3Cols.primary.products[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  products: prismic.GroupField<
+    Simplify<ProductListSliceCarousel3ColsPrimaryProductsItem>
+  >;
+}
+
+/**
+ * Carousel 3 Cols variation for ProductList Slice
+ *
+ * - **API ID**: `carousel3Cols`
+ * - **Description**: Product carousel with 3-column basis
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProductListSliceCarousel3Cols = prismic.SharedSliceVariation<
+  "carousel3Cols",
+  Simplify<ProductListSliceCarousel3ColsPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ProductList → Grid 4 Cols → Primary*
+ */
+export interface ProductListSliceGrid4ColsPrimary {
+  /**
+   * Tagline field in *ProductList → Grid 4 Cols → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter tagline
+   * - **API ID Path**: product_list.grid4Cols.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Heading field in *ProductList → Grid 4 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: product_list.grid4Cols.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *ProductList → Grid 4 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: product_list.grid4Cols.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * View All Link field in *ProductList → Grid 4 Cols → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid4Cols.primary.view_all_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  view_all_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Products field in *ProductList → Grid 4 Cols → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid4Cols.primary.products[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  products: prismic.GroupField<
+    Simplify<ProductListSliceGrid4ColsPrimaryProductsItem>
+  >;
+}
+
+/**
+ * Grid 4 Cols variation for ProductList Slice
+ *
+ * - **API ID**: `grid4Cols`
+ * - **Description**: Product grid with 4 columns
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProductListSliceGrid4Cols = prismic.SharedSliceVariation<
+  "grid4Cols",
+  Simplify<ProductListSliceGrid4ColsPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ProductList → Grid 3 Cols → Primary*
+ */
+export interface ProductListSliceGrid3ColsPrimary {
+  /**
+   * Tagline field in *ProductList → Grid 3 Cols → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter tagline
+   * - **API ID Path**: product_list.grid3Cols.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Heading field in *ProductList → Grid 3 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter heading
+   * - **API ID Path**: product_list.grid3Cols.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *ProductList → Grid 3 Cols → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: product_list.grid3Cols.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * View All Link field in *ProductList → Grid 3 Cols → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid3Cols.primary.view_all_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  view_all_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Products field in *ProductList → Grid 3 Cols → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_list.grid3Cols.primary.products[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  products: prismic.GroupField<
+    Simplify<ProductListSliceGrid3ColsPrimaryProductsItem>
+  >;
+}
+
+/**
+ * Grid 3 Cols variation for ProductList Slice
+ *
+ * - **API ID**: `grid3Cols`
+ * - **Description**: Product grid with 3 columns
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProductListSliceGrid3Cols = prismic.SharedSliceVariation<
+  "grid3Cols",
+  Simplify<ProductListSliceGrid3ColsPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ProductList*
+ */
+type ProductListSliceVariation =
+  | ProductListSliceDefault
+  | ProductListSliceCarousel3Cols
+  | ProductListSliceGrid4Cols
+  | ProductListSliceGrid3Cols;
+
+/**
+ * ProductList Shared Slice
+ *
+ * - **API ID**: `product_list`
+ * - **Description**: Product listing in carousel or grid layouts
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProductListSlice = prismic.SharedSlice<
+  "product_list",
+  ProductListSliceVariation
+>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -198,12 +2946,103 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      ArticleDocument,
+      ArticleDocumentData,
+      ArticleDocumentDataSlicesSlice,
+      ArticleCategoryDocument,
+      ArticleCategoryDocumentData,
+      HomeDocument,
+      HomeDocumentData,
+      HomeDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       PageCategoryDocument,
       PageCategoryDocumentData,
       AllDocumentTypes,
+      CallToActionSlice,
+      CallToActionSliceDefaultPrimary,
+      CallToActionSliceWithBackgroundImagePrimary,
+      CallToActionSliceWithBackgroundColorPrimary,
+      CallToActionSliceTwoColsPrimary,
+      CallToActionSliceTwoColsTextAndImagePrimary,
+      CallToActionSliceTwoColsFeaturedCollectionPrimary,
+      CallToActionSliceTwoColsFeaturedProductPrimary,
+      CallToActionSliceIfTwoColsFeaturedCollectionPrimary,
+      CallToActionSliceIfTwoColsFeaturedProductPrimary,
+      CallToActionSliceVariation,
+      CallToActionSliceDefault,
+      CallToActionSliceWithBackgroundImage,
+      CallToActionSliceWithBackgroundColor,
+      CallToActionSliceTwoCols,
+      CallToActionSliceTwoColsTextAndImage,
+      CallToActionSliceTwoColsFeaturedCollection,
+      CallToActionSliceTwoColsFeaturedProduct,
+      CallToActionSliceIfTwoColsFeaturedCollection,
+      CallToActionSliceIfTwoColsFeaturedProduct,
+      EditorialContentSlice,
+      EditorialContentSliceDefaultPrimary,
+      EditorialContentSliceTwoColsTextAndImagePrimary,
+      EditorialContentSliceTwoColsWithFullSizeImagePrimary,
+      EditorialContentSliceQuotePrimary,
+      EditorialContentSliceTwoColsImageAndTextPrimary,
+      EditorialContentSliceVariation,
+      EditorialContentSliceDefault,
+      EditorialContentSliceTwoColsTextAndImage,
+      EditorialContentSliceTwoColsWithFullSizeImage,
+      EditorialContentSliceQuote,
+      EditorialContentSliceTwoColsImageAndText,
+      FeaturedContentSlice,
+      FeaturedContentSliceDefaultPrimaryCardsItem,
+      FeaturedContentSliceDefaultPrimary,
+      FeaturedContentSliceContentRelationshipPrimaryArticlesItem,
+      FeaturedContentSliceContentRelationshipPrimary,
+      FeaturedContentSliceBackgroundImageCardsPrimaryCardsItem,
+      FeaturedContentSliceBackgroundImageCardsPrimary,
+      FeaturedContentSliceVariation,
+      FeaturedContentSliceDefault,
+      FeaturedContentSliceContentRelationship,
+      FeaturedContentSliceBackgroundImageCards,
+      HeaderSlice,
+      HeaderSliceDefaultPrimary,
+      HeaderSliceWithBottomImagePrimary,
+      HeaderSliceTwoColsWithImagePrimary,
+      HeaderSliceTwoColsWithFullSizeImagePrimary,
+      HeaderSliceWithBackgroundImagePrimary,
+      HeaderSliceVariation,
+      HeaderSliceDefault,
+      HeaderSliceWithBottomImage,
+      HeaderSliceTwoColsWithImage,
+      HeaderSliceTwoColsWithFullSizeImage,
+      HeaderSliceWithBackgroundImage,
+      ImageGallerySlice,
+      ImageGallerySliceDefaultPrimaryImagesItem,
+      ImageGallerySliceDefaultPrimary,
+      ImageGallerySliceThreeColsPrimaryImagesItem,
+      ImageGallerySliceThreeColsPrimary,
+      ImageGallerySliceVariation,
+      ImageGallerySliceDefault,
+      ImageGallerySliceThreeCols,
+      MediaSlice,
+      MediaSliceDefaultPrimary,
+      MediaSliceVideoPrimary,
+      MediaSliceVariation,
+      MediaSliceDefault,
+      MediaSliceVideo,
+      ProductListSlice,
+      ProductListSliceDefaultPrimaryProductsItem,
+      ProductListSliceDefaultPrimary,
+      ProductListSliceCarousel3ColsPrimaryProductsItem,
+      ProductListSliceCarousel3ColsPrimary,
+      ProductListSliceGrid4ColsPrimaryProductsItem,
+      ProductListSliceGrid4ColsPrimary,
+      ProductListSliceGrid3ColsPrimaryProductsItem,
+      ProductListSliceGrid3ColsPrimary,
+      ProductListSliceVariation,
+      ProductListSliceDefault,
+      ProductListSliceCarousel3Cols,
+      ProductListSliceGrid4Cols,
+      ProductListSliceGrid3Cols,
     };
   }
 }

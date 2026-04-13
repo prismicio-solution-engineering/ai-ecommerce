@@ -1,0 +1,58 @@
+{
+  "id": "media",
+  "type": "SharedSlice",
+  "name": "Media",
+  "description": "Image or video media block with optional caption",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Image",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Single image with optional caption",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image"
+          }
+        },
+        "caption": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Caption",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Optional caption"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "video",
+      "name": "Video",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Embedded video with optional caption",
+      "imageUrl": "",
+      "primary": {
+        "video": {
+          "type": "Embed",
+          "config": {
+            "label": "Video"
+          }
+        },
+        "caption": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Caption",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Optional caption"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

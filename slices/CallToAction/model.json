@@ -1,0 +1,486 @@
+{
+  "id": "call_to_action",
+  "type": "SharedSlice",
+  "name": "CallToAction",
+  "description": "Call-to-action sections with multiple layout options",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Centered or left-aligned CTA with heading, description, and buttons",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading2",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "center_text": {
+          "type": "Boolean",
+          "config": {
+            "label": "Center text"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "withBackgroundImage",
+      "name": "With Background Image",
+      "docURL": "...",
+      "version": "initial",
+      "description": "CTA with full background image and overlay",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading2",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Background Image"
+          }
+        },
+        "center_text": {
+          "type": "Boolean",
+          "config": {
+            "label": "Center text"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "withBackgroundColor",
+      "name": "With Background Color",
+      "docURL": "...",
+      "version": "initial",
+      "description": "CTA with colored background container",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading2",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "background_color": {
+          "type": "Color",
+          "config": {
+            "label": "Background Color"
+          }
+        },
+        "center_text": {
+          "type": "Boolean",
+          "config": {
+            "label": "Center text"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "twoCols",
+      "name": "Two Cols",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Two-column CTA with heading/description on left, buttons on right",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading2",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "twoColsTextAndImage",
+      "name": "Two Cols Text and Image",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Two-column CTA with text on one side and image on the other",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading2",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image"
+          }
+        },
+        "image_left": {
+          "type": "Boolean",
+          "config": {
+            "label": "Image on left"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "twoColsFeaturedCollection",
+      "name": "Two Cols Featured Collection",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Two-column with collection text reference and full-size image",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading1",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image"
+          }
+        },
+        "collection_reference": {
+          "type": "Text",
+          "config": {
+            "label": "Collection Reference",
+            "placeholder": "Collection handle"
+          }
+        },
+        "image_left": {
+          "type": "Boolean",
+          "config": {
+            "label": "Image on left"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "twoColsFeaturedProduct",
+      "name": "Two Cols Featured Product",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Two-column with product text reference and full-size image",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading1",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image"
+          }
+        },
+        "product_reference": {
+          "type": "Text",
+          "config": {
+            "label": "Product Reference",
+            "placeholder": "Product handle"
+          }
+        },
+        "image_left": {
+          "type": "Boolean",
+          "config": {
+            "label": "Image on left"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "ifTwoColsFeaturedCollection",
+      "name": "IF Two Cols Featured Collection",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Two-column with collection integration field and full-size image",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading1",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image"
+          }
+        },
+        "collection": {
+          "type": "IntegrationFields",
+          "config": {
+            "label": "Collection",
+            "catalog": "collection"
+          }
+        },
+        "image_left": {
+          "type": "Boolean",
+          "config": {
+            "label": "Image on left"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "ifTwoColsFeaturedProduct",
+      "name": "IF Two Cols Featured Product",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Two-column with product integration field and full-size image",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading1",
+            "placeholder": "Enter heading"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "buttons": {
+          "type": "Link",
+          "config": {
+            "label": "Buttons",
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image"
+          }
+        },
+        "product": {
+          "type": "IntegrationFields",
+          "config": {
+            "label": "Product",
+            "catalog": "product"
+          }
+        },
+        "image_left": {
+          "type": "Boolean",
+          "config": {
+            "label": "Image on left"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
