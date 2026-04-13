@@ -19,9 +19,21 @@ export const repositoryName =
  */
 // TODO: Update the routes array to match your project's route structure.
 const routes: Route[] = [
-  // Examples:
-  // { type: "homepage", path: "/" },
-  // { type: "page", path: "/:uid" },
+  { type: "home", path: "/" },
+  {
+    type: "page",
+    resolvers: {
+      category: "category"
+    },
+    path: "/:category?/:uid"
+  },
+  {
+    type: "article",
+    resolvers: {
+      category: "category"
+    },
+    path: "/blog/:category?/:uid"
+  },
 ];
 
 /**
@@ -33,10 +45,10 @@ const routes: Route[] = [
 export const createClient = (config: ClientConfig = {}) => {
   const client = baseCreateClient(repositoryName, {
     routes,
-    fetchOptions:
-      process.env.NODE_ENV === "production"
-        ? { next: { tags: ["prismic"] }, cache: "force-cache" }
-        : { next: { revalidate: 5 } },
+    fetchOptions: {
+      next: { tags: ["prismic"] },
+      cache: "force-cache",
+    },
     ...config,
   });
 
