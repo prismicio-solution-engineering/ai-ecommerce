@@ -1,6 +1,7 @@
 import { PrismicRichText } from "@prismicio/react";
 import type { RichTextField } from "@prismicio/client";
 import type { JSXMapSerializer } from "@prismicio/react";
+import { PrismicNextLink } from "@prismicio/next";
 
 type Props = {
   field: RichTextField;
@@ -48,14 +49,12 @@ export function RichText({ field, components, className }: Props) {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
     hyperlink: ({ node, children }) => (
-      <a
-        href={node.data.url}
+      <PrismicNextLink
+        field={node.data}
         className="text-[var(--brand-primary)] underline"
-        target={node.data.target ?? undefined}
-        rel={node.data.target === "_blank" ? "noopener noreferrer" : undefined}
       >
         {children}
-      </a>
+      </PrismicNextLink>
     ),
     list: ({ children }) => (
       <ul className="mb-4 list-disc pl-6 text-[var(--color-text-secondary)] md:text-md">
