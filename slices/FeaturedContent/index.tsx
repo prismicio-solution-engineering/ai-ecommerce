@@ -35,7 +35,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
                 <RichText field={heading} />
                 <RichText
                   field={description}
-                  className="text-[var(--color-text-secondary)]"
+                  additionalClassNames="text-[var(--color-text-secondary)]"
                 />
               </div>
             </div>
@@ -87,7 +87,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
                     />
                     <RichText
                       field={card.description}
-                      className="text-[var(--color-text-secondary)]"
+                      additionalClassNames="text-[var(--color-text-secondary)]"
                     />
                     {isFilled.link(card.link) && (
                       <div className="mt-5 md:mt-6">
@@ -135,7 +135,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
                 <RichText field={heading} />
                 <RichText
                   field={description}
-                  className="text-[var(--color-text-secondary)]"
+                  additionalClassNames="text-[var(--color-text-secondary)]"
                 />
               </div>
             </div>
@@ -207,7 +207,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
               <RichText field={heading} />
               <RichText
                 field={description}
-                className="text-[var(--color-text-secondary)]"
+                additionalClassNames="text-[var(--color-text-secondary)]"
               />
             </div>
           </div>

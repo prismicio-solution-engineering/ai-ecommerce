@@ -23,7 +23,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
             <RichText field={heading} />
             <RichText
               field={description}
-              className="text-[var(--color-text-secondary)]"
+              additionalClassNames="text-[var(--color-text-secondary)]"
             />
             {isFilled.repeatable(slice.primary.buttons) && (
               <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
@@ -53,7 +53,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
                 <RichText field={heading} />
                 <RichText
                   field={description}
-                  className="text-[var(--color-text-secondary)]"
+                  additionalClassNames="text-[var(--color-text-secondary)]"
                 />
                 {isFilled.repeatable(slice.primary.buttons) && (
                   <div className="mt-6 flex items-center justify-center gap-x-4 md:mt-8">
@@ -93,7 +93,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
               <RichText field={heading} />
               <RichText
                 field={description}
-                className="text-[var(--color-text-secondary)]"
+                additionalClassNames="text-[var(--color-text-secondary)]"
               />
               {isFilled.repeatable(slice.primary.buttons) && (
                 <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
@@ -140,7 +140,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
               <RichText field={heading} />
               <RichText
                 field={description}
-                className="text-[var(--color-text-secondary)]"
+                additionalClassNames="text-[var(--color-text-secondary)]"
               />
             </div>
           </>
@@ -150,7 +150,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
               <RichText field={heading} />
               <RichText
                 field={description}
-                className="text-[var(--color-text-secondary)]"
+                additionalClassNames="text-[var(--color-text-secondary)]"
               />
             </div>
             {isFilled.image(slice.primary.image) && (

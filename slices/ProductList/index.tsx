@@ -73,7 +73,7 @@ function SectionHeader({
           </p>
         )}
         <RichText field={heading} />
-        <RichText field={description} className="text-[var(--color-text-secondary)]" />
+        <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
       </div>
       {viewAllLink && isFilled.link(viewAllLink) && (
         <Button field={viewAllLink} variant="Secondary" className="hidden md:flex inline-flex items-center justify-center gap-2 rounded border border-[var(--color-button-secondary-border)] bg-[var(--color-button-secondary-bg)] px-6 py-3 text-[var(--color-button-secondary-text)] font-medium transition-opacity hover:opacity-90" />

@@ -26,7 +26,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ slice }) => {
           <RichText field={heading} />
           <RichText
             field={description}
-            className="text-[var(--color-text-secondary)]"
+            additionalClassNames="text-[var(--color-text-secondary)]"
           />
         </div>
         <div

@@ -91,7 +91,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
         <RichText field={slice.primary.heading} />
         <RichText
           field={slice.primary.description}
-          className="text-[var(--color-text-secondary)]"
+          additionalClassNames="text-[var(--color-text-secondary)]"
         />
         {isFilled.repeatable(slice.primary.buttons) && (
           <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
@@ -208,7 +208,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
                   />
                   <RichText
                     field={slice.primary.description}
-                    className="text-[var(--color-text-secondary)]"
+                    additionalClassNames="text-[var(--color-text-secondary)]"
                   />
                 </div>
               </>
@@ -227,7 +227,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
                   />
                   <RichText
                     field={slice.primary.description}
-                    className="text-[var(--color-text-secondary)]"
+                    additionalClassNames="text-[var(--color-text-secondary)]"
                   />
                 </div>
                 {isFilled.image(slice.primary.image) && (

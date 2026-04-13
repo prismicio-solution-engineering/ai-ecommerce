@@ -83,7 +83,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       >
         <div className={`container max-w-lg ${center ? "text-center" : ""}`}>
           <RichText field={heading} />
-          <RichText field={description} className="text-[var(--color-text-secondary)]" />
+          <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
           {isFilled.repeatable(slice.primary.buttons) && (
             <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "items-center justify-center" : ""}`}>
               {slice.primary.buttons.map((link, i) => (
@@ -181,7 +181,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
                   ),
                 }}
               />
-              <RichText field={description} className="text-[var(--color-text-secondary)]" />
+              <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
             </div>
           </div>
           {isFilled.repeatable(slice.primary.buttons) && (
@@ -209,7 +209,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
           <div className="grid grid-cols-1 gap-x-20 gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:items-center">
             <div className={imageLeft ? "order-2" : "order-1"}>
               <RichText field={heading} />
-              <RichText field={description} className="text-[var(--color-text-secondary)]" />
+              <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
               {isFilled.repeatable(slice.primary.buttons) && (
                 <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
                   {slice.primary.buttons.map((link, i) => (
@@ -246,7 +246,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
         textContent={
           <>
             <RichText field={heading} />
-            <RichText field={description} className="text-[var(--color-text-secondary)]" />
+            <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
             {isFilled.repeatable(slice.primary.buttons) && (
               <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
                 {slice.primary.buttons.map((link, i) => (
