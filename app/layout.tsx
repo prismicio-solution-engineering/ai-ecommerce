@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { PrismicPreview } from "@prismicio/next";
-import { repositoryName } from "@/prismicio";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+
+const rationalDisplay = localFont({
+  src: "../public/fonts/RationalDisplay/RationalDisplay-SemiBold.woff2",
+  variable: "--font-rational",
+});
+
+const satoshi = localFont({
+  src: "../public/fonts/Satoshi/Satoshi-Variable.woff2",
+  variable: "--font-satoshi",
+  weight: "500",
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -20,18 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} h-full antialiased`}>
-      <head>
-        <style>{`
-          :root {
-            --font-heading: ${inter.style.fontFamily};
-            --font-body: ${inter.style.fontFamily};
-          }
-        `}</style>
-      </head>
-      <body  lang="en" className="min-h-full flex flex-col">
+    <html 
+      lang="en" 
+      className={`h-full antialiased ${rationalDisplay.variable} ${satoshi.variable}`}
+    >
+      <body className="min-h-full flex flex-col font-body">
         {children}
-        <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
   );

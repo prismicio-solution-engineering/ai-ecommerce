@@ -7,8 +7,10 @@
   --brand-accent: #8b5cf6;
 
   /* Typography */
-  --font-heading: 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif; */
+  --font-heading: var(--font-rational);
+  --font-body: var(--font-satoshi);
 
   /* Backgrounds */
   --color-background: #ffffff;
@@ -61,8 +63,10 @@ body {
   background: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-body);
+  letter-spacing: -1%;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+  letter-spacing: -3%;
 }
