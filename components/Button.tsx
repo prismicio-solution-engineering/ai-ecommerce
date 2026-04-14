@@ -29,9 +29,9 @@ type Props = AsLinkProps | AsRelationshipProps | AsButtonProps;
 
 const variantStyles: Record<LinkVariant, string> = {
   Primary:
-    "inline-flex items-center justify-center gap-2 rounded bg-[var(--color-button-primary-bg)] px-6 py-3 text-[var(--color-button-primary-text)] font-medium transition-opacity hover:opacity-90",
+    "inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--color-button-primary-bg)] bg-[var(--color-button-primary-bg)] px-6 py-3 text-[var(--color-button-primary-text)] font-medium transition-all shadow-[0px_12px_16px_-4px_#00000019] hover:opacity-90 hover:scale-105",
   Secondary:
-    "inline-flex items-center justify-center gap-2 rounded border border-[var(--color-button-secondary-border)] bg-[var(--color-button-secondary-bg)] px-6 py-3 text-[var(--color-button-secondary-text)] font-medium transition-opacity hover:opacity-90",
+    "inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--color-button-secondary-border)] bg-[var(--color-button-secondary-bg)] px-6 py-3 text-[var(--color-button-secondary-text)] font-medium transition-all shadow-[0px_12px_16px_-4px_#00000019] hover:opacity-90 hover:scale-105",
 };
 
 function resolveVariant(field?: LinkField | ContentRelationshipField, variant?: LinkVariant): LinkVariant {
