@@ -54,7 +54,7 @@ export async function generateStaticParams() {
     }
     return null;
   }
-  console.log(pages);
+  // console.log(pages);
   return pages
     .map((page) => {
       return splitUrl(page.url!);

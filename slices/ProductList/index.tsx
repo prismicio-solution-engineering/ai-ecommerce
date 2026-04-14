@@ -6,49 +6,77 @@ import { SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { RichText } from "@/components/RichText";
 import { Button } from "@/components/Button";
+import { useState, useEffect } from "react";
 
 export type ProductListProps = SliceComponentProps<Content.ProductListSlice>;
 
+interface FetchedProduct {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+  rating: number;
+}
+
+/* Fetch product from dummyjson */
+async function fetchProduct(id: string): Promise<FetchedProduct> {
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  if (!response.ok) throw new Error(`Failed to fetch product ${id}`);
+  return response.json();
+}
+
 /* Shared product card */
 function ProductCard({
-  product,
+  productRef,
 }: {
-  product: Content.ProductListSliceDefaultPrimaryProductsItem;
+  productRef: string;
 }) {
+  const [product, setProduct] = useState<FetchedProduct | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchProduct(productRef)
+      .then(setProduct)
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [productRef]);
+
+  if (loading) {
+    return <div className="animate-pulse bg-gray-200 aspect-[5/6]" />;
+  }
+
+  if (error || !product) {
+    return <div className="text-sm text-red-500">Failed to load product</div>;
+  }
+
   const inner = (
     <>
-      {isFilled.image(product.image) && (
+      {product.thumbnail && (
         <div className="mb-3 aspect-[5/6] md:mb-4">
-          <PrismicNextImage field={product.image} className="size-full object-cover" />
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            className="size-full object-cover"
+          />
         </div>
       )}
       <div className="mb-2">
-        {product.title && (
-          <h3 className="font-semibold text-[var(--color-text-primary)] md:text-md">
-            {product.title}
-          </h3>
-        )}
-        {product.variant && (
-          <div className="text-sm font-normal text-[var(--color-text-secondary)]">
-            {product.variant}
-          </div>
-        )}
+        <h3 className="font-semibold text-[var(--color-text-primary)] md:text-md line-clamp-2">
+          {product.title}
+        </h3>
       </div>
-      {product.price && (
-        <div className="text-md font-semibold text-[var(--color-text-primary)] md:text-lg">
-          {product.price}
+      <div className="text-md font-semibold text-[var(--color-text-primary)] md:text-lg">
+        ${product.price.toFixed(2)}
+      </div>
+      {product.rating && (
+        <div className="text-sm text-[var(--color-text-secondary)]">
+          ★ {product.rating.toFixed(1)}
         </div>
       )}
     </>
   );
 
-  if (isFilled.link(product.link)) {
-    return (
-      <PrismicNextLink field={product.link} className="block">
-        {inner}
-      </PrismicNextLink>
-    );
-  }
   return <div>{inner}</div>;
 }
 
@@ -113,7 +141,7 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
                 key={index}
                 className={`min-w-[80%] shrink-0 sm:min-w-[60%] md:min-w-[45%] ${carouselBasis}`}
               >
-                <ProductCard product={product} />
+                <ProductCard productRef={product.product_reference || ""} />
               </div>
             ))}
           </div>
@@ -145,7 +173,7 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
           className={`grid grid-cols-1 justify-items-start gap-x-5 gap-y-12 md:gap-x-8 md:gap-y-16 lg:gap-x-12 ${gridCols}`}
         >
           {products.map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <ProductCard key={index} productRef={product.product_reference || ""} />
           ))}
         </div>
       </div>

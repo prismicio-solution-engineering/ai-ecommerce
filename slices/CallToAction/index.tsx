@@ -1,11 +1,28 @@
+"use client";
+
 import type { FC } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import { RichText } from "@/components/RichText";
 import { Button } from "@/components/Button";
+import { useState, useEffect } from "react";
 
 export type CallToActionProps = SliceComponentProps<Content.CallToActionSlice>;
+
+/* Fetch product from dummyjson */
+async function fetchProduct(id: string) {
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  if (!response.ok) throw new Error(`Failed to fetch product ${id}`);
+  return response.json();
+}
+
+/* Fetch category from dummyjson */
+async function fetchCategory(slug: string) {
+  const response = await fetch(`https://dummyjson.com/products/category/${slug}`);
+  if (!response.ok) throw new Error(`Failed to fetch category ${slug}`);
+  return response.json();
+}
 
 /* Reusable two-col full-size layout (Header37/Header36 pattern) */
 function TwoColsFullSize({
@@ -240,24 +257,138 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
     slice.variation === "ifTwoColsFeaturedCollection" ||
     slice.variation === "ifTwoColsFeaturedProduct"
   ) {
-    return (
-      <TwoColsFullSize
-        slice={slice}
-        textContent={
-          <>
-            <RichText field={heading} />
-            <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
-            {isFilled.repeatable(slice.primary.buttons) && (
-              <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
-                {slice.primary.buttons.map((link, i) => (
-                  <Button key={i} field={link} />
-                ))}
-              </div>
-            )}
-          </>
+    const isCollection = slice.variation.includes("Collection");
+    const isIntegration = slice.variation.startsWith("if");
+
+    let referenceId: string | null = null;
+
+    if (isIntegration) {
+      // Get ID from integration field blob
+      const primary = slice.primary as Record<string, unknown>;
+      const integrationField = isCollection
+        ? (primary.collection as Record<string, unknown> | undefined)
+        : (primary.product as Record<string, unknown> | undefined);
+      referenceId = (integrationField?.id as string) || null;
+    } else {
+      // Get ID from text field
+      const primary = slice.primary as Record<string, unknown>;
+      const textField = isCollection
+        ? (primary.collection_reference as string | undefined)
+        : (primary.product_reference as string | undefined);
+      referenceId = textField || null;
+    }
+
+    // Render featured content with fetched data
+    const FeaturedContent = () => {
+      const [data, setData] = useState<Record<string, unknown> | null>(null);
+      const [loading, setLoading] = useState(!!referenceId);
+      const [error, setError] = useState<string | null>(null);
+
+      useEffect(() => {
+        if (!referenceId) {
+          setLoading(false);
+          return;
         }
-      />
-    );
+
+        const promise = isCollection
+          ? fetchCategory(referenceId)
+          : fetchProduct(referenceId);
+
+        promise
+          .then(setData)
+          .catch((err) => setError(err.message))
+          .finally(() => setLoading(false));
+      }, []);
+
+      if (!referenceId) {
+        return (
+          <TwoColsFullSize
+            slice={slice}
+            textContent={
+              <>
+                <RichText field={heading} />
+                <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
+                {isFilled.repeatable(slice.primary.buttons) && (
+                  <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
+                    {slice.primary.buttons.map((link, i) => (
+                      <Button key={i} field={link} />
+                    ))}
+                  </div>
+                )}
+              </>
+            }
+          />
+        );
+      }
+
+      if (loading) {
+        return (
+          <TwoColsFullSize
+            slice={slice}
+            textContent={
+              <>
+                <RichText field={heading} />
+                <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
+                <div className="mt-4 h-4 w-32 animate-pulse bg-gray-200" />
+              </>
+            }
+          />
+        );
+      }
+
+      if (error || !data) {
+        return (
+          <TwoColsFullSize
+            slice={slice}
+            textContent={
+              <>
+                <RichText field={heading} />
+                <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
+                <p className="mt-4 text-sm text-red-500">{error || "Failed to load data"}</p>
+              </>
+            }
+          />
+        );
+      }
+
+      return (
+        <TwoColsFullSize
+          slice={slice}
+          textContent={
+            <>
+              <RichText field={heading} />
+              <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
+              {isCollection && (data as Record<string, unknown>).products ? (
+                <p className="mt-4 text-sm text-[var(--color-text-secondary)]">
+                  {((data as Record<string, unknown>).products as Array<unknown>).length} products available
+                </p>
+              ) : null}
+              {!isCollection && (
+                <div className="mt-4 space-y-2">
+                  <p className="text-lg font-semibold text-[var(--color-text-primary)]">
+                    ${String((data as Record<string, unknown>).price)}
+                  </p>
+                  {(data as Record<string, unknown>).rating ? (
+                    <p className="text-sm text-[var(--color-text-secondary)]">
+                      ★ {((data as Record<string, unknown>).rating as number).toFixed(1)} rating
+                    </p>
+                  ) : null}
+                </div>
+              )}
+              {isFilled.repeatable(slice.primary.buttons) && (
+                <div className="mt-6 flex flex-wrap gap-4 md:mt-8">
+                  {slice.primary.buttons.map((link, i) => (
+                    <Button key={i} field={link} />
+                  ))}
+                </div>
+              )}
+            </>
+          }
+        />
+      );
+    };
+
+    return <FeaturedContent />;
   }
 
   return null;

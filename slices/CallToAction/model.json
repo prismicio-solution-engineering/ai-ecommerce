@@ -293,7 +293,7 @@
           "type": "Text",
           "config": {
             "label": "Collection Reference",
-            "placeholder": "Collection handle"
+            "placeholder": "Collection ID"
           }
         },
         "image_left": {
@@ -352,7 +352,7 @@
           "type": "Text",
           "config": {
             "label": "Product Reference",
-            "placeholder": "Product handle"
+            "placeholder": "Product ID"
           }
         },
         "image_left": {
@@ -411,7 +411,7 @@
           "type": "IntegrationFields",
           "config": {
             "label": "Collection",
-            "catalog": "collection"
+            "catalog": "ai-ecom--categories"
           }
         },
         "image_left": {
@@ -470,7 +470,7 @@
           "type": "IntegrationFields",
           "config": {
             "label": "Product",
-            "catalog": "product"
+            "catalog": "ai-ecom--products"
           }
         },
         "image_left": {

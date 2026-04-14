@@ -103,7 +103,7 @@ interface ArticleDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<ArticleDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<ArticleDocumentDataSlicesSlice>; /**
    * Meta Title field in *Article*
    *
    * - **Field Type**: Text
@@ -111,7 +111,7 @@ interface ArticleDocumentData {
    * - **API ID Path**: article.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -205,7 +205,7 @@ interface HomeDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<HomeDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<HomeDocumentDataSlicesSlice>; /**
    * Meta Title field in *Home*
    *
    * - **Field Type**: Text
@@ -213,7 +213,7 @@ interface HomeDocumentData {
    * - **API ID Path**: home.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -279,7 +279,7 @@ interface PageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/slices
    */
-  slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>; /**
    * Meta Title field in *Page*
    *
    * - **Field Type**: Text
@@ -287,7 +287,7 @@ interface PageDocumentData {
    * - **API ID Path**: page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -770,7 +770,7 @@ export interface CallToActionSliceTwoColsFeaturedCollectionPrimary {
    * Collection Reference field in *CallToAction → Two Cols Featured Collection → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Collection handle
+   * - **Placeholder**: Collection ID
    * - **API ID Path**: call_to_action.twoColsFeaturedCollection.primary.collection_reference
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
@@ -857,7 +857,7 @@ export interface CallToActionSliceTwoColsFeaturedProductPrimary {
    * Product Reference field in *CallToAction → Two Cols Featured Product → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Product handle
+   * - **Placeholder**: Product ID
    * - **API ID Path**: call_to_action.twoColsFeaturedProduct.primary.product_reference
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
@@ -943,7 +943,7 @@ export interface CallToActionSliceIfTwoColsFeaturedCollectionPrimary {
   /**
    * Collection field in *CallToAction → IF Two Cols Featured Collection → Primary*
    *
-   * - **Field Type**: Integration Fields (Catalog: `collection`)
+   * - **Field Type**: Integration Fields (Catalog: `ai-ecom--categories`)
    * - **Placeholder**: *None*
    * - **API ID Path**: call_to_action.ifTwoColsFeaturedCollection.primary.collection
    * - **Documentation**: https://prismic.io/docs/fields/integration
@@ -1030,7 +1030,7 @@ export interface CallToActionSliceIfTwoColsFeaturedProductPrimary {
   /**
    * Product field in *CallToAction → IF Two Cols Featured Product → Primary*
    *
-   * - **Field Type**: Integration Fields (Catalog: `product`)
+   * - **Field Type**: Integration Fields (Catalog: `ai-ecom--products`)
    * - **Placeholder**: *None*
    * - **API ID Path**: call_to_action.ifTwoColsFeaturedProduct.primary.product
    * - **Documentation**: https://prismic.io/docs/fields/integration
@@ -2385,54 +2385,14 @@ export type MediaSlice = prismic.SharedSlice<"media", MediaSliceVariation>;
  */
 export interface ProductListSliceDefaultPrimaryProductsItem {
   /**
-   * Image field in *ProductList → Carousel 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.default.primary.products[].image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Title field in *ProductList → Carousel 4 Cols → Primary → Products*
+   * Product Reference field in *ProductList → Carousel 4 Cols → Primary → Products*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Product name
-   * - **API ID Path**: product_list.default.primary.products[].title
+   * - **Placeholder**: Product ID (e.g., 1)
+   * - **API ID Path**: product_list.default.primary.products[].product_reference
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  title: prismic.KeyTextField;
-
-  /**
-   * Variant field in *ProductList → Carousel 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Variant
-   * - **API ID Path**: product_list.default.primary.products[].variant
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  variant: prismic.KeyTextField;
-
-  /**
-   * Price field in *ProductList → Carousel 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: $55
-   * - **API ID Path**: product_list.default.primary.products[].price
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  price: prismic.KeyTextField;
-
-  /**
-   * Link field in *ProductList → Carousel 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.default.primary.products[].link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  product_reference: prismic.KeyTextField;
 }
 
 /**
@@ -2440,54 +2400,14 @@ export interface ProductListSliceDefaultPrimaryProductsItem {
  */
 export interface ProductListSliceCarousel3ColsPrimaryProductsItem {
   /**
-   * Image field in *ProductList → Carousel 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.carousel3Cols.primary.products[].image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Title field in *ProductList → Carousel 3 Cols → Primary → Products*
+   * Product Reference field in *ProductList → Carousel 3 Cols → Primary → Products*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Product name
-   * - **API ID Path**: product_list.carousel3Cols.primary.products[].title
+   * - **Placeholder**: Product ID (e.g., 1)
+   * - **API ID Path**: product_list.carousel3Cols.primary.products[].product_reference
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  title: prismic.KeyTextField;
-
-  /**
-   * Variant field in *ProductList → Carousel 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Variant
-   * - **API ID Path**: product_list.carousel3Cols.primary.products[].variant
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  variant: prismic.KeyTextField;
-
-  /**
-   * Price field in *ProductList → Carousel 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: $55
-   * - **API ID Path**: product_list.carousel3Cols.primary.products[].price
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  price: prismic.KeyTextField;
-
-  /**
-   * Link field in *ProductList → Carousel 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.carousel3Cols.primary.products[].link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  product_reference: prismic.KeyTextField;
 }
 
 /**
@@ -2495,54 +2415,14 @@ export interface ProductListSliceCarousel3ColsPrimaryProductsItem {
  */
 export interface ProductListSliceGrid4ColsPrimaryProductsItem {
   /**
-   * Image field in *ProductList → Grid 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.grid4Cols.primary.products[].image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Title field in *ProductList → Grid 4 Cols → Primary → Products*
+   * Product Reference field in *ProductList → Grid 4 Cols → Primary → Products*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Product name
-   * - **API ID Path**: product_list.grid4Cols.primary.products[].title
+   * - **Placeholder**: Product ID (e.g., 1)
+   * - **API ID Path**: product_list.grid4Cols.primary.products[].product_reference
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  title: prismic.KeyTextField;
-
-  /**
-   * Variant field in *ProductList → Grid 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Variant
-   * - **API ID Path**: product_list.grid4Cols.primary.products[].variant
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  variant: prismic.KeyTextField;
-
-  /**
-   * Price field in *ProductList → Grid 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: $55
-   * - **API ID Path**: product_list.grid4Cols.primary.products[].price
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  price: prismic.KeyTextField;
-
-  /**
-   * Link field in *ProductList → Grid 4 Cols → Primary → Products*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.grid4Cols.primary.products[].link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  product_reference: prismic.KeyTextField;
 }
 
 /**
@@ -2550,54 +2430,14 @@ export interface ProductListSliceGrid4ColsPrimaryProductsItem {
  */
 export interface ProductListSliceGrid3ColsPrimaryProductsItem {
   /**
-   * Image field in *ProductList → Grid 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.grid3Cols.primary.products[].image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Title field in *ProductList → Grid 3 Cols → Primary → Products*
+   * Product Reference field in *ProductList → Grid 3 Cols → Primary → Products*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Product name
-   * - **API ID Path**: product_list.grid3Cols.primary.products[].title
+   * - **Placeholder**: Product ID (e.g., 1)
+   * - **API ID Path**: product_list.grid3Cols.primary.products[].product_reference
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  title: prismic.KeyTextField;
-
-  /**
-   * Variant field in *ProductList → Grid 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Variant
-   * - **API ID Path**: product_list.grid3Cols.primary.products[].variant
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  variant: prismic.KeyTextField;
-
-  /**
-   * Price field in *ProductList → Grid 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: $55
-   * - **API ID Path**: product_list.grid3Cols.primary.products[].price
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  price: prismic.KeyTextField;
-
-  /**
-   * Link field in *ProductList → Grid 3 Cols → Primary → Products*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_list.grid3Cols.primary.products[].link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  product_reference: prismic.KeyTextField;
 }
 
 /**

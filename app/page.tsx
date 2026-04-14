@@ -22,7 +22,7 @@ export default async function HomePage() {
   const client = createClient();
   // console.log(client);
   const home = await client.getSingle("home").catch(() => notFound());
-  console.log(home);
+  // console.log(home);
 
   return <SliceZone slices={home.data.slices} components={components} />;
 }
