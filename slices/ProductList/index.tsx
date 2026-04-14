@@ -51,9 +51,9 @@ function ProductCard({
   }
 
   const inner = (
-    <>
+    <div className="transition-all hover:scale-101 hover:cursor-pointer">
       {product.thumbnail && (
-        <div className="mb-3 aspect-[5/6] md:mb-4">
+        <div className="mb-3 aspect-[5/6] md:mb-4 border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary) p-4">
           <img
             src={product.thumbnail}
             alt={product.title}
@@ -74,7 +74,7 @@ function ProductCard({
           ★ {product.rating.toFixed(1)}
         </div>
       )}
-    </>
+    </div>
   );
 
   return <div>{inner}</div>;
@@ -104,7 +104,7 @@ function SectionHeader({
         <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
       </div>
       {viewAllLink && isFilled.link(viewAllLink) && (
-        <Button field={viewAllLink} variant="Secondary" className="hidden md:flex inline-flex items-center justify-center gap-2 rounded border border-[var(--color-button-secondary-border)] bg-[var(--color-button-secondary-bg)] px-6 py-3 text-[var(--color-button-secondary-text)] font-medium transition-opacity hover:opacity-90" />
+        <Button field={viewAllLink} variant="Secondary" className="hidden md:flex inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--color-button-secondary-border)] bg-[var(--color-button-secondary-bg)] px-6 py-3 text-[var(--color-button-secondary-text)] font-medium transition-all hover:opacity-90 hover:scale-105" />
       )}
     </div>
   );
@@ -117,8 +117,10 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
   const isCarousel =
     slice.variation === "default" || slice.variation === "carousel3Cols";
 
+  // const carouselBasis =
+  //   slice.variation === "carousel3Cols" ? "lg:basis-[33%] lg:pr-12" : "lg:basis-1/4";
   const carouselBasis =
-    slice.variation === "carousel3Cols" ? "lg:basis-[33%] lg:pr-12" : "lg:basis-1/4";
+  slice.variation === "carousel3Cols" ? "lg:basis-1/3" : "lg:basis-1/4";
 
   // -- Carousel variations ----------------------------------------------
   if (isCarousel) {
@@ -135,11 +137,11 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
             description={description}
             viewAllLink={view_all_link}
           />
-          <div className="flex gap-6 overflow-x-auto pb-4 md:gap-8">
+          <div className="flex gap-6 overflow-x-auto pt-4 pb-4 md:gap-8">
             {products.map((product, index) => (
               <div
                 key={index}
-                className={`min-w-[80%] shrink-0 sm:min-w-[60%] md:min-w-[45%] ${carouselBasis}`}
+                className={`min-w-[80%] shrink-0 sm:min-w-[60%] md:min-w-[45%] lg:min-w-0 ${carouselBasis}`}
               >
                 <ProductCard productRef={product.product_reference || ""} />
               </div>

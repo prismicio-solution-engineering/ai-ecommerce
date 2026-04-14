@@ -38,14 +38,14 @@ const ImageGallery: FC<ImageGalleryProps> = ({ slice }) => {
             const imageEl = (
               <PrismicNextImage
                 field={item.image}
-                className="size-full object-cover"
+                className="size-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
               />
             );
 
             return (
               <figure key={index}>
                 {isFilled.link(item.link) ? (
-                  <PrismicNextLink field={item.link}>
+                  <PrismicNextLink field={item.link} className="block transition-transform duration-300 hover:scale-101">
                     {imageEl}
                   </PrismicNextLink>
                 ) : (

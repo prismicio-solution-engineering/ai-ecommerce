@@ -21,7 +21,10 @@
   --color-text-secondary: #6b7280;
 
   /* Borders */
-  --color-border: #e5e7eb;
+  --color-border: #151515;
+
+  /* Shadow */
+  --shadow-primary: 0px 12px 16px -4px #00000019;
 
   /* Buttons */
   --color-button-primary-bg: var(--brand-primary);
@@ -45,7 +48,7 @@
   --radius: 0.5rem;                 /* rounded-lg */
 
   /* Overlay */
-  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-overlay: rgba(0, 0, 0, 0.6);
 
   /* Text on overlay / background images */
   --color-text-alternative: #ffffff;

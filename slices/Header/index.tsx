@@ -68,7 +68,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
               <div>
                 <PrismicNextImage
                   field={slice.primary.image}
-                  className="size-full object-cover"
+                  className="size-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
                 />
               </div>
             )}
@@ -107,7 +107,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
               <div className={imageLeft ? "order-1 lg:order-1" : "order-2"}>
                 <PrismicNextImage
                   field={slice.primary.image}
-                  className="w-full object-cover"
+                  className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
                 />
               </div>
             )}
@@ -182,7 +182,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
                 field={heading}
                 components={{
                   heading1: ({ children }) => (
-                    <h1 className="mb-5 text-6xl font-bold text-[var(--color-text-alternative)] md:mb-6 md:text-9xl lg:text-10xl">
+                    <h1 className="mb-5 text-4xl font-bold text-[var(--color-text-alternative)] md:mb-6 md:text-5xl lg:text-6xl">
                       {children}
                     </h1>
                   ),

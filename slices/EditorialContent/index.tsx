@@ -43,7 +43,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
                   <div>
                     <PrismicNextImage
                       field={slice.primary.image}
-                      className="w-full object-cover"
+                      className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
                     />
                   </div>
                 )}
@@ -62,7 +62,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
                   <div>
                     <PrismicNextImage
                       field={slice.primary.image}
-                      className="w-full object-cover"
+                      className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
                     />
                   </div>
                 )}
@@ -134,12 +134,15 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
       >
         <div className="container">
           <div className="mx-auto max-w-lg">
-            <blockquote className="border-l-4 border-[var(--brand-primary)] pl-6">
+            <blockquote className="flex flex-col sm:flex-row gap-4 p-6 border-2 border-[var(--color-text-secondary)] bg-[var(--color-surface)] rounded-xl shadow-(--shadow-primary)">
+              <div className="text-[var(--color-text-secondary)]">
+                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="currentColor"><path d="m228-240 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T458-480L320-240h-92Zm360 0 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T818-480L680-240h-92Z"/></svg>
+              </div>
               <RichText
                 field={slice.primary.quote}
                 components={{
                   paragraph: ({ children }) => (
-                    <p className="text-lg italic text-[var(--color-text-primary)] md:text-xl">
+                    <p className="text-lg italic text-[var(--color-text-secondary)] md:text-xl">
                       {children}
                     </p>
                   ),
@@ -151,7 +154,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
                 {isFilled.image(slice.primary.author_image) && (
                   <PrismicNextImage
                     field={slice.primary.author_image}
-                    className="size-14 rounded-full object-cover"
+                    className="size-14 rounded-full object-cover shadow-(--shadow-primary)"
                   />
                 )}
                 <div>
@@ -191,7 +194,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
                   <div>
                     <PrismicNextImage
                       field={slice.primary.image}
-                      className="w-full object-cover"
+                      className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
                     />
                   </div>
                 )}
@@ -234,7 +237,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
                   <div>
                     <PrismicNextImage
                       field={slice.primary.image}
-                      className="w-full object-cover"
+                      className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
                     />
                   </div>
                 )}

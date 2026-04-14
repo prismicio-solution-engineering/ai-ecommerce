@@ -76,14 +76,14 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
   // Helper: alternative text components for overlay variations
   const altHeading = {
     heading2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="mb-5 text-5xl font-bold text-[var(--color-text-alternative)] md:mb-6 md:text-7xl lg:text-8xl">
+      <h2 className="mb-5 text-3xl font-bold text-[var(--color-text-alternative)] md:mb-6 md:text-4xl lg:text-5xl">
         {children}
       </h2>
     ),
   };
   const altParagraph = {
     paragraph: ({ children }: { children: React.ReactNode }) => (
-      <p className="text-[var(--color-text-alternative)] md:text-md">
+      <p className="text-[var(--color-text-alternative)] md:text-[18px]">
         {children}
       </p>
     ),
@@ -98,16 +98,18 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className={`container max-w-lg ${center ? "text-center" : ""}`}>
-          <RichText field={heading} />
-          <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
-          {isFilled.repeatable(slice.primary.buttons) && (
-            <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "items-center justify-center" : ""}`}>
-              {slice.primary.buttons.map((link, i) => (
-                <Button key={i} field={link} />
-              ))}
-            </div>
-          )}
+        <div className={`w-full flex ${center ? "justify-center" : ""}`}>
+          <div className={`container max-w-lg ${center ? "text-center" : ""}`}>
+            <RichText field={heading} />
+            <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
+            {isFilled.repeatable(slice.primary.buttons) && (
+              <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "items-center justify-center" : ""}`}>
+                {slice.primary.buttons.map((link, i) => (
+                  <Button key={i} field={link} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </section>
     );
@@ -154,11 +156,11 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
+        style={bgColor ? { backgroundColor: bgColor } : undefined}
       >
         <div className="container relative">
           <div
-            className={`relative z-10 flex flex-col p-8 md:p-12 lg:p-16 ${center ? "items-center text-center" : ""}`}
-            style={bgColor ? { backgroundColor: bgColor } : undefined}
+            className={`relative z-10 flex flex-col ${center ? "items-center text-center" : ""}`}
           >
             <div className="max-w-lg">
               <RichText field={heading} components={altHeading} />
@@ -192,7 +194,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
                 field={heading}
                 components={{
                   heading2: ({ children }) => (
-                    <h2 className="mb-3 text-4xl font-bold leading-[1.2] text-[var(--color-text-primary)] md:mb-4 md:text-5xl lg:text-6xl">
+                    <h2 className="mb-5 text-3xl font-bold text-[var(--color-text-primary)] md:mb-6 md:text-4xl lg:text-5xl">
                       {children}
                     </h2>
                   ),
@@ -237,7 +239,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
             </div>
             {isFilled.image(slice.primary.image) && (
               <div className={imageLeft ? "order-1" : "order-2"}>
-                <PrismicNextImage field={slice.primary.image} className="w-full object-cover" />
+                <PrismicNextImage field={slice.primary.image} className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)" />
               </div>
             )}
           </div>

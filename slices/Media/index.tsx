@@ -21,7 +21,7 @@ const Media: FC<MediaProps> = ({ slice }) => {
             <figure>
               <PrismicNextImage
                 field={slice.primary.image}
-                className="w-full object-cover"
+                className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
               />
               {isFilled.richText(slice.primary.caption) && (
                 <figcaption className="mt-3 text-center">
@@ -58,7 +58,7 @@ const Media: FC<MediaProps> = ({ slice }) => {
           <div className="mx-auto max-w-lg">
             <figure>
               <div
-                className="aspect-video w-full overflow-hidden"
+                className="aspect-video w-full overflow-hidden [&>iframe]:size-full border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
                 dangerouslySetInnerHTML={{ __html: embed.html ?? "" }}
               />
               {isFilled.richText(slice.primary.caption) && (
