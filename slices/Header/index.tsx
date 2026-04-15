@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="mx-auto w-full max-w-lg text-center">
             <RichText field={heading} />
             <RichText
@@ -46,7 +46,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-center">
             <div className="mb-12 text-center md:mb-18 lg:mb-20">
               <div className="w-full max-w-lg">
@@ -87,7 +87,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 gap-x-20 gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:items-center">
             <div className={imageLeft ? "order-2 lg:order-2" : "order-1"}>
               <RichText field={heading} />
@@ -124,7 +124,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0"
+        className="grid grid-cols-1 items-center lg:grid-cols-2 lg:pt-0"
       >
         {imageLeft ? (
           <>
@@ -136,7 +136,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
                 />
               </div>
             )}
-            <div className="mx-[5%] sm:max-w-md md:justify-self-start lg:ml-20 lg:mr-[5vw]">
+            <div className="mx-[5%] my-[10%] sm:max-w-md md:justify-self-start lg:ml-20 lg:mr-[5vw]">
               <RichText field={heading} />
               <RichText
                 field={description}
@@ -146,7 +146,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
           </>
         ) : (
           <>
-            <div className="mx-[5%] sm:max-w-md md:justify-self-start lg:ml-[5vw] lg:mr-20 lg:justify-self-end">
+            <div className="mx-[5%] my-[10%] sm:max-w-md md:justify-self-start lg:ml-[5vw] lg:mr-20 lg:justify-self-end">
               <RichText field={heading} />
               <RichText
                 field={description}
@@ -175,7 +175,7 @@ const Header: FC<HeaderProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="relative px-[5%]"
       >
-        <div className="container relative z-10">
+        <div className="mx-auto max-w-5xl relative z-10">
           <div className="flex max-h-[60rem] min-h-svh items-center py-16 md:py-24 lg:py-28">
             <div className="max-w-md">
               <RichText

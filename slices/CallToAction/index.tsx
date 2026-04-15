@@ -49,18 +49,18 @@ function TwoColsFullSize({
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0"
+      className="grid grid-cols-1 items-center lg:grid-cols-2 lg:pt-0"
     >
       {imageLeft ? (
         <>
           {imageBlock}
-          <div className="mx-[5%] sm:max-w-md md:justify-self-start lg:ml-20 lg:mr-[5vw]">
+          <div className="mx-[5%] my-[10%] sm:max-w-md md:justify-self-start lg:ml-20 lg:mr-[5vw]">
             {textContent}
           </div>
         </>
       ) : (
         <>
-          <div className="mx-[5%] sm:max-w-md md:justify-self-start lg:ml-[5vw] lg:mr-20 lg:justify-self-end">
+          <div className="mx-[5%] my-[10%] sm:max-w-md md:justify-self-start lg:ml-[5vw] lg:mr-20 lg:justify-self-end">
             {textContent}
           </div>
           {imageBlock}
@@ -124,7 +124,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="relative px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className={`container relative z-10 ${center ? "flex flex-col items-center text-center" : ""}`}>
+        <div className={`relative z-10 ${center ? "flex flex-col items-center text-center" : ""}`}>
           <div className="w-full max-w-lg">
             <RichText field={heading} components={altHeading} />
             <RichText field={description} components={altParagraph} />
@@ -158,7 +158,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
         className="px-[5%] py-16 md:py-24 lg:py-28"
         style={bgColor ? { backgroundColor: bgColor } : undefined}
       >
-        <div className="container relative">
+        <div className="relative">
           <div
             className={`relative z-10 flex flex-col ${center ? "items-center text-center" : ""}`}
           >
@@ -187,7 +187,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container grid w-full grid-cols-1 items-start justify-between gap-6 md:grid-cols-[1fr_max-content] md:gap-x-12 md:gap-y-8 lg:gap-x-20">
+        <div className="mx-auto max-w-5xl grid w-full grid-cols-1 items-start justify-between gap-6 md:grid-cols-[1fr_max-content] md:gap-x-12 md:gap-y-8 lg:gap-x-20">
           <div className="md:mr-12 lg:mr-0">
             <div className="w-full max-w-lg">
               <RichText
@@ -224,7 +224,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 gap-x-20 gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:items-center">
             <div className={imageLeft ? "order-2" : "order-1"}>
               <RichText field={heading} />

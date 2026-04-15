@@ -22,7 +22,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           {/* Header row */}
           <div className="mb-12 grid grid-cols-1 items-start justify-start gap-y-8 md:grid-cols-[1fr_max-content] md:items-end md:justify-between md:gap-x-12 md:gap-y-4 lg:gap-x-20">
             <div className="md:mr-12 lg:mr-0">
@@ -127,7 +127,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-12 grid grid-cols-1 items-start justify-start gap-y-8 md:mb-18 md:grid-cols-[1fr_max-content] md:items-end md:justify-between md:gap-x-12 md:gap-y-4 lg:mb-20 lg:gap-x-20">
             <div className="md:mr-12 lg:mr-0">
               <div className="w-full max-w-lg">
@@ -203,7 +203,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-12 md:mb-18 lg:mb-20">
             <div className="mx-auto max-w-lg text-center">
               {tagline && (

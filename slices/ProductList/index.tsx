@@ -67,11 +67,13 @@ function ProductCard({
         </h3>
       </div>
       <div className="text-md font-semibold text-[var(--color-text-primary)] md:text-lg">
-        ${product.price.toFixed(2)}
+        {/* ${product.price.toFixed(2)} */}
+        ${product.price}
       </div>
       {product.rating && (
         <div className="text-sm text-[var(--color-text-secondary)]">
-          ★ {product.rating.toFixed(1)}
+          {/* ★ {product.rating.toFixed(1)} */}
+          ★ {product.rating}
         </div>
       )}
     </div>
@@ -130,7 +132,7 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <SectionHeader
             tagline={tagline}
             heading={heading}
@@ -164,7 +166,7 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="px-[5%] py-16 md:py-24 lg:py-28"
     >
-      <div className="container">
+      <div className="w-full max-w-5xl mx-auto">
         <SectionHeader
           tagline={tagline}
           heading={heading}
@@ -172,7 +174,7 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
           viewAllLink={view_all_link}
         />
         <div
-          className={`grid grid-cols-1 justify-items-start gap-x-5 gap-y-12 md:gap-x-8 md:gap-y-16 lg:gap-x-12 ${gridCols}`}
+          className={`grid grid-cols-1 justify-items-center gap-x-5 gap-y-12 md:gap-x-8 md:gap-y-16 lg:gap-x-12 ${gridCols}`}
         >
           {products.map((product, index) => (
             <ProductCard key={index} productRef={product.product_reference || ""} />

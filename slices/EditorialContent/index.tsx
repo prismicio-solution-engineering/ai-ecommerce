@@ -17,11 +17,9 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
           <div className="mx-auto max-w-lg">
             <RichText field={slice.primary.content} />
           </div>
-        </div>
       </section>
     );
   }
@@ -35,7 +33,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 items-start gap-y-12 md:grid-cols-2 md:gap-x-12 lg:gap-x-20">
             {imageLeft ? (
               <>
@@ -87,7 +85,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
     ) : null;
 
     const textBlock = (
-      <div className="mx-[5%] sm:max-w-md md:justify-self-start lg:mx-20">
+      <div className={`mx-[5%] my-[10%] sm:max-w-md ${imageLeft ? "lg:justify-self-start" : "lg:justify-self-end"} lg:mx-20`}>
         <RichText field={slice.primary.heading} />
         <RichText
           field={slice.primary.description}
@@ -107,7 +105,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0"
+        className="grid grid-cols-1 items-center lg:grid-cols-2 lg:pt-0"
       >
         {imageLeft ? (
           <>
@@ -132,46 +130,44 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
-          <div className="mx-auto max-w-lg">
-            <blockquote className="flex flex-col sm:flex-row gap-4 p-6 border-2 border-[var(--color-text-secondary)] bg-[var(--color-surface)] rounded-xl shadow-(--shadow-primary)">
-              <div className="text-[var(--color-text-secondary)]">
-                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="currentColor"><path d="m228-240 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T458-480L320-240h-92Zm360 0 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T818-480L680-240h-92Z"/></svg>
-              </div>
-              <RichText
-                field={slice.primary.quote}
-                components={{
-                  paragraph: ({ children }) => (
-                    <p className="text-lg italic text-[var(--color-text-secondary)] md:text-xl">
-                      {children}
-                    </p>
-                  ),
-                }}
-              />
-            </blockquote>
-            {(slice.primary.author_name || isFilled.image(slice.primary.author_image)) && (
-              <div className="mt-8 flex items-center gap-4">
-                {isFilled.image(slice.primary.author_image) && (
-                  <PrismicNextImage
-                    field={slice.primary.author_image}
-                    className="size-14 rounded-full object-cover shadow-(--shadow-primary)"
-                  />
+        <div className="mx-auto max-w-lg">
+          <blockquote className="flex flex-col sm:flex-row gap-4 p-6 border-2 border-[var(--color-text-secondary)] bg-[var(--color-surface)] rounded-xl shadow-(--shadow-primary)">
+            <div className="text-[var(--color-text-secondary)]">
+              <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="currentColor"><path d="m228-240 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T458-480L320-240h-92Zm360 0 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T818-480L680-240h-92Z"/></svg>
+            </div>
+            <RichText
+              field={slice.primary.quote}
+              components={{
+                paragraph: ({ children }) => (
+                  <p className="text-lg italic text-[var(--color-text-secondary)] md:text-xl">
+                    {children}
+                  </p>
+                ),
+              }}
+            />
+          </blockquote>
+          {(slice.primary.author_name || isFilled.image(slice.primary.author_image)) && (
+            <div className="mt-8 flex items-center gap-4">
+              {isFilled.image(slice.primary.author_image) && (
+                <PrismicNextImage
+                  field={slice.primary.author_image}
+                  className="size-14 rounded-full object-cover shadow-(--shadow-primary)"
+                />
+              )}
+              <div>
+                {slice.primary.author_name && (
+                  <p className="font-semibold text-[var(--color-text-primary)] md:text-md">
+                    {slice.primary.author_name}
+                  </p>
                 )}
-                <div>
-                  {slice.primary.author_name && (
-                    <p className="font-semibold text-[var(--color-text-primary)] md:text-md">
-                      {slice.primary.author_name}
-                    </p>
-                  )}
-                  {slice.primary.author_title && (
-                    <p className="text-[var(--color-text-secondary)]">
-                      {slice.primary.author_title}
-                    </p>
-                  )}
-                </div>
+                {slice.primary.author_title && (
+                  <p className="text-[var(--color-text-secondary)]">
+                    {slice.primary.author_title}
+                  </p>
+                )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </section>
     );
@@ -186,7 +182,7 @@ const EditorialContent: FC<EditorialContentProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="px-[5%] py-16 md:py-24 lg:py-28"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 gap-y-12 md:grid-cols-2 md:items-center md:gap-x-12 lg:gap-x-20">
             {imageLeft ? (
               <>
