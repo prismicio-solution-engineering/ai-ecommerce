@@ -131,7 +131,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
             {isFilled.repeatable(slice.primary.buttons) && (
               <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "justify-center" : ""}`}>
                 {slice.primary.buttons.map((link, i) => (
-                  <Button key={i} field={link} />
+                  <Button key={i} field={link} alternative />
                 ))}
               </div>
             )}
@@ -169,7 +169,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
             {isFilled.repeatable(slice.primary.buttons) && (
               <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "items-center justify-center" : ""}`}>
                 {slice.primary.buttons.map((link, i) => (
-                  <Button key={i} field={link} />
+                  <Button key={i} field={link} alternative />
                 ))}
               </div>
             )}
