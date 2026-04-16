@@ -355,48 +355,6 @@ export type HomeDocument<Lang extends string = string> =
 type NavigationDocumentDataNavLinksSlice = NavLinksSlice;
 
 /**
- * Item in *Navigation → Buttons*
- */
-export interface NavigationDocumentDataButtonsItem {
-  /**
-   * Button Text field in *Navigation → Buttons*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Button text
-   * - **API ID Path**: navigation.buttons[].button_text
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  button_text: prismic.KeyTextField;
-
-  /**
-   * Button Link field in *Navigation → Buttons*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation.buttons[].button_link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  button_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
-
-  /**
-   * Button Variant field in *Navigation → Buttons*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: Primary
-   * - **API ID Path**: navigation.buttons[].button_variant
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  button_variant: prismic.SelectField<"Primary" | "Secondary", "filled">;
-}
-
-/**
  * Content for Navigation documents
  */
 interface NavigationDocumentData {
@@ -429,7 +387,26 @@ interface NavigationDocumentData {
   >;
 
   /**
-   * Navigation Links field in *Navigation*
+   * Buttons field in *Navigation*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.buttons
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  buttons: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+
+  /**
+   * Slice Zone field in *Navigation*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -438,17 +415,6 @@ interface NavigationDocumentData {
    * - **Documentation**: https://prismic.io/docs/slices
    */
   nav_links: prismic.SliceZone<NavigationDocumentDataNavLinksSlice>;
-
-  /**
-   * Buttons field in *Navigation*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation.buttons[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  buttons: prismic.GroupField<Simplify<NavigationDocumentDataButtonsItem>>;
 }
 
 /**
@@ -2630,16 +2596,6 @@ export type MediaSlice = prismic.SharedSlice<"media", MediaSliceVariation>;
  */
 export interface NavLinksSliceDefaultPrimary {
   /**
-   * Title field in *NavLinks → Regular → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Link title
-   * - **API ID Path**: nav_links.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  title: prismic.KeyTextField;
-
-  /**
    * Link field in *NavLinks → Regular → Primary*
    *
    * - **Field Type**: Link
@@ -3149,7 +3105,6 @@ declare module "@prismicio/client" {
       NavigationDocument,
       NavigationDocumentData,
       NavigationDocumentDataNavLinksSlice,
-      NavigationDocumentDataButtonsItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,

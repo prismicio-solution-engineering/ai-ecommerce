@@ -3,6 +3,7 @@
   "label": "Navigation",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "logo_image": {
@@ -22,47 +23,25 @@
           "select": null
         }
       },
+      "buttons": {
+        "type": "Link",
+        "config": {
+          "label": "Buttons",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true,
+          "variants": ["Primary", "Secondary"]
+        }
+      },
       "nav_links": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "label": "Navigation Links",
           "choices": {
             "nav_links": {
               "type": "SharedSlice"
-            }
-          }
-        }
-      },
-      "buttons": {
-        "type": "Group",
-        "config": {
-          "label": "Buttons",
-          "fields": {
-            "button_text": {
-              "type": "Text",
-              "config": {
-                "label": "Button Text",
-                "placeholder": "Button text"
-              }
-            },
-            "button_link": {
-              "type": "Link",
-              "config": {
-                "label": "Button Link",
-                "select": null
-              }
-            },
-            "button_variant": {
-              "type": "Select",
-              "config": {
-                "label": "Button Variant",
-                "options": [
-                  "Primary",
-                  "Secondary"
-                ],
-                "default_value": "Primary"
-              }
             }
           }
         }
