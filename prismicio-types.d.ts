@@ -82,6 +82,28 @@ type ArticleDocumentDataSlicesSlice =
  */
 interface ArticleDocumentData {
   /**
+   * Title field in *Article*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Image field in *Article*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
    * Category field in *Article*
    *
    * - **Field Type**: Content Relationship
@@ -93,6 +115,41 @@ interface ArticleDocumentData {
   category: ContentRelationshipFieldWithData<
     [{ id: "article_category"; fields: ["category_name"] }]
   >;
+
+  /**
+   * Author field in *Article*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.author
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  author: ContentRelationshipFieldWithData<
+    [{ id: "article_author"; fields: ["author_name", "author_picture"] }]
+  >;
+
+  /**
+   * Publication date field in *Article*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.publication_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  publication_date: prismic.DateField;
+
+  /**
+   * Reading time estimation (minutes) field in *Article*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.reading_time_estimation
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  reading_time_estimation: prismic.NumberField;
 
   /**
    * Slice Zone field in *Article*
@@ -150,6 +207,49 @@ export type ArticleDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<ArticleDocumentData>,
     "article",
+    Lang
+  >;
+
+/**
+ * Content for Article author documents
+ */
+interface ArticleAuthorDocumentData {
+  /**
+   * Author name field in *Article author*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article_author.author_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  author_name: prismic.KeyTextField;
+
+  /**
+   * Author picture field in *Article author*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article_author.author_picture
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  author_picture: prismic.ImageField<never>;
+}
+
+/**
+ * Article author document from Prismic
+ *
+ * - **API ID**: `article_author`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ArticleAuthorDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ArticleAuthorDocumentData>,
+    "article_author",
     Lang
   >;
 
@@ -359,6 +459,7 @@ export type PageCategoryDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | ArticleDocument
+  | ArticleAuthorDocument
   | ArticleCategoryDocument
   | HomeDocument
   | PageDocument
@@ -2789,6 +2890,8 @@ declare module "@prismicio/client" {
       ArticleDocument,
       ArticleDocumentData,
       ArticleDocumentDataSlicesSlice,
+      ArticleAuthorDocument,
+      ArticleAuthorDocumentData,
       ArticleCategoryDocument,
       ArticleCategoryDocumentData,
       HomeDocument,
