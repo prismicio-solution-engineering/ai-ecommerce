@@ -106,7 +106,7 @@ function SectionHeader({
         <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
       </div>
       {viewAllLink && isFilled.link(viewAllLink) && (
-        <Button field={viewAllLink} variant="Secondary" className="hidden md:flex inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--color-button-secondary-border)] bg-[var(--color-button-secondary-bg)] px-6 py-3 text-[var(--color-button-secondary-text)] font-medium transition-all hover:opacity-90 hover:scale-105" />
+        <Button field={viewAllLink} variant="Secondary" className="hidden md:flex inline-flex items-center justify-center gap-2 rounded-lg shadow-(--shadow-primary) border-2 border-[var(--color-button-secondary-border)] bg-[var(--color-button-secondary-bg)] px-6 py-3 text-[var(--color-button-secondary-text)] font-medium transition-all hover:opacity-90 hover:scale-105" />
       )}
     </div>
   );
@@ -130,7 +130,7 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
+        className="overflow-hidden px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className="mx-auto max-w-5xl">
           <SectionHeader
@@ -164,7 +164,7 @@ const ProductList: FC<ProductListProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="px-[5%] py-16 md:py-24 lg:py-28"
+      className="px-[5%] py-8 md:py-12 lg:py-16"
     >
       <div className="w-full max-w-5xl mx-auto">
         <SectionHeader

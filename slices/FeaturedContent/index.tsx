@@ -20,7 +20,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
+        className="overflow-hidden px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className="mx-auto max-w-5xl">
           {/* Header row */}
@@ -125,7 +125,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
+        className="overflow-hidden px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className="mx-auto max-w-5xl">
           <div className="mb-12 grid grid-cols-1 items-start justify-start gap-y-8 md:mb-18 md:grid-cols-[1fr_max-content] md:items-end md:justify-between md:gap-x-12 md:gap-y-4 lg:mb-20 lg:gap-x-20">
@@ -201,7 +201,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className="mx-auto max-w-5xl">
           <div className="mb-12 md:mb-18 lg:mb-20">

@@ -14,9 +14,9 @@ const Media: FC<MediaProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-5xl">
           <figure>
             <PrismicNextImage
               field={slice.primary.image}
@@ -50,9 +50,9 @@ const Media: FC<MediaProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-5xl">
           <figure>
             <div
               className="aspect-video w-full overflow-hidden [&>iframe]:size-full border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"

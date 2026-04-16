@@ -54,13 +54,13 @@ function TwoColsFullSize({
       {imageLeft ? (
         <>
           {imageBlock}
-          <div className="mx-[5%] my-[10%] sm:max-w-md md:justify-self-start lg:ml-20 lg:mr-[5vw]">
+          <div className="w-full box-border px-[5%] py-[10%] lg:max-w-xl md:justify-self-start lg:px-20">
             {textContent}
           </div>
         </>
       ) : (
         <>
-          <div className="mx-[5%] my-[10%] sm:max-w-md md:justify-self-start lg:ml-[5vw] lg:mr-20 lg:justify-self-end">
+          <div className="w-full box-border px-[5%] py-[10%] lg:max-w-xl md:justify-self-start lg:px-20">
             {textContent}
           </div>
           {imageBlock}
@@ -96,7 +96,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className={`w-full flex ${center ? "justify-center" : ""}`}>
           <div className={`container max-w-lg ${center ? "text-center" : ""}`}>
@@ -122,7 +122,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="relative px-[5%] py-16 md:py-24 lg:py-28"
+        className="relative px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className={`relative z-10 ${center ? "flex flex-col items-center text-center" : ""}`}>
           <div className="w-full max-w-lg">
@@ -155,7 +155,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
         style={bgColor ? { backgroundColor: bgColor } : undefined}
       >
         <div className="relative">
@@ -185,7 +185,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className="mx-auto max-w-5xl grid w-full grid-cols-1 items-start justify-between gap-6 md:grid-cols-[1fr_max-content] md:gap-x-12 md:gap-y-8 lg:gap-x-20">
           <div className="md:mr-12 lg:mr-0">
@@ -222,7 +222,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
         <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 gap-x-20 gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:items-center">
