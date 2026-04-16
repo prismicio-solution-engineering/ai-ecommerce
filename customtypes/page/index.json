@@ -30,7 +30,29 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "product_list": {
+              "type": "SharedSlice"
+            },
+            "media": {
+              "type": "SharedSlice"
+            },
+            "editorial_content": {
+              "type": "SharedSlice"
+            },
+            "image_gallery": {
+              "type": "SharedSlice"
+            },
+            "call_to_action": {
+              "type": "SharedSlice"
+            },
+            "featured_content": {
+              "type": "SharedSlice"
+            },
+            "header": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },

@@ -16,8 +16,9 @@
           "type": "StructuredText",
           "config": {
             "label": "Content",
-            "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,list-item,o-list-item",
-            "placeholder": "Enter content"
+            "placeholder": "Enter content",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,list-item,o-list-item"
           }
         }
       },
@@ -82,8 +83,18 @@
           "type": "StructuredText",
           "config": {
             "label": "Description",
-            "single": "paragraph,strong,em,hyperlink",
-            "placeholder": "Enter description"
+            "placeholder": "Enter description",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Content",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
           }
         },
         "buttons": {
@@ -173,8 +184,9 @@
           "type": "StructuredText",
           "config": {
             "label": "Description",
-            "single": "paragraph,strong,em,hyperlink",
-            "placeholder": "Enter description"
+            "placeholder": "Enter description",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
           }
         },
         "image": {
@@ -187,6 +199,15 @@
           "type": "Boolean",
           "config": {
             "label": "Image on left"
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Content",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,hyperlink,list-item,o-list-item,strong,em"
           }
         }
       },
