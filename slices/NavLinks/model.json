@@ -32,13 +32,6 @@
       "description": "Navigation link with submenu items",
       "imageUrl": "",
       "primary": {
-        "title": {
-          "type": "Text",
-          "config": {
-            "label": "Title",
-            "placeholder": "Link title"
-          }
-        },
         "link": {
           "type": "Link",
           "config": {

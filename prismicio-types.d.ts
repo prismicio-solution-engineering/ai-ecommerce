@@ -2624,16 +2624,6 @@ export type NavLinksSliceDefault = prismic.SharedSliceVariation<
  */
 export interface NavLinksSliceWithSubmenuPrimary {
   /**
-   * Title field in *NavLinks → With Submenu → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Link title
-   * - **API ID Path**: nav_links.withSubmenu.primary.title
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  title: prismic.KeyTextField;
-
-  /**
    * Link field in *NavLinks → With Submenu → Primary*
    *
    * - **Field Type**: Link
