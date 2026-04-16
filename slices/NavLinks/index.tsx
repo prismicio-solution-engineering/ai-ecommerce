@@ -6,17 +6,15 @@ import { PrismicNextLink } from "@prismicio/next";
 export type NavLinksProps = SliceComponentProps<Content.NavLinksSlice>;
 
 const NavLinks: FC<NavLinksProps> = ({ slice }) => {
-  const { title, link } = slice.primary;
+  const { link } = slice.primary;
 
   if (slice.variation === "default") {
     return (
       <div>
         {isFilled.link(link) ? (
-          <PrismicNextLink field={link} className="block">
-            {title}
-          </PrismicNextLink>
+          <PrismicNextLink field={link} className="block" />
         ) : (
-          <span>{title}</span>
+          <span>{link.text}</span>
         )}
       </div>
     );
@@ -26,19 +24,17 @@ const NavLinks: FC<NavLinksProps> = ({ slice }) => {
     return (
       <div>
         {isFilled.link(link) ? (
-          <PrismicNextLink field={link} className="block">
-            {title}
-          </PrismicNextLink>
+          <PrismicNextLink field={link} className="block" />
         ) : (
-          <span>{title}</span>
+          <span>{link.text}</span>
         )}
-        {isFilled.repeatable(slice.items) && (
+        {isFilled.repeatable(slice.primary.submenu_links) && (
           <div className="submenu">
-            {slice.items.map((item, index) => (
+            {slice.primary.submenu_links.map((link, index) => (
               <div key={index}>
-                {isFilled.link(item.submenu_links) && (
-                  <PrismicNextLink field={item.submenu_links}>
-                    {item.submenu_links?.text || "Link"}
+                {isFilled.link(link) && (
+                  <PrismicNextLink field={link}>
+                    {link?.text || "Link"}
                   </PrismicNextLink>
                 )}
               </div>
