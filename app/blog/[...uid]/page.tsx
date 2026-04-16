@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import ArticleHeader from "@/components/Article/ArticleHeader";
 
 type Params = { uid: string };
 
@@ -13,7 +14,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { uid } = await params;
   const client = createClient();
-  const article = await client.getByUID("article", uid).catch(() => null);
+  const article = await client
+    .getByUID("article", uid[uid.length - 1])
+    .catch(() => null);
 
   if (!article) return {};
 
@@ -30,8 +33,22 @@ export default async function ArticlePage({
 }) {
   const { uid } = await params;
   const client = createClient();
-  const article = await client.getByUID("article", uid).catch(() => notFound());
-  return <SliceZone slices={article.data.slices} components={components} />;
+  const article = await client
+    .getByUID("article", uid[uid.length - 1], {
+      fetchLinks: [
+        "article_category.category_name",
+        "article_author.author_name",
+        "article_author.author_picture",
+      ],
+    })
+    .catch(() => notFound());
+
+  return (
+    <main>
+      <ArticleHeader data={article.data} />
+      <SliceZone slices={article.data.slices} components={components} />
+    </main>
+  );
 }
 
 export async function generateStaticParams() {

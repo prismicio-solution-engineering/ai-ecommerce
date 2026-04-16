@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type ArticleDocumentDataSlicesSlice =
+  | HeaderSlice
   | CallToActionSlice
   | FeaturedContentSlice
   | ImageGallerySlice
@@ -82,6 +83,28 @@ type ArticleDocumentDataSlicesSlice =
  */
 interface ArticleDocumentData {
   /**
+   * Title field in *Article*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Image field in *Article*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
    * Category field in *Article*
    *
    * - **Field Type**: Content Relationship
@@ -93,6 +116,41 @@ interface ArticleDocumentData {
   category: ContentRelationshipFieldWithData<
     [{ id: "article_category"; fields: ["category_name"] }]
   >;
+
+  /**
+   * Author field in *Article*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.author
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  author: ContentRelationshipFieldWithData<
+    [{ id: "article_author"; fields: ["author_name", "author_picture"] }]
+  >;
+
+  /**
+   * Publication date field in *Article*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.publication_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  publication_date: prismic.DateField;
+
+  /**
+   * Reading time estimation (minutes) field in *Article*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article.reading_time_estimation
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  reading_time_estimation: prismic.NumberField;
 
   /**
    * Slice Zone field in *Article*
@@ -150,6 +208,49 @@ export type ArticleDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<ArticleDocumentData>,
     "article",
+    Lang
+  >;
+
+/**
+ * Content for Article author documents
+ */
+interface ArticleAuthorDocumentData {
+  /**
+   * Author name field in *Article author*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article_author.author_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  author_name: prismic.KeyTextField;
+
+  /**
+   * Author picture field in *Article author*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: article_author.author_picture
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  author_picture: prismic.ImageField<never>;
+}
+
+/**
+ * Article author document from Prismic
+ *
+ * - **API ID**: `article_author`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ArticleAuthorDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ArticleAuthorDocumentData>,
+    "article_author",
     Lang
   >;
 
@@ -251,7 +352,129 @@ interface HomeDocumentData {
 export type HomeDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
 
-type PageDocumentDataSlicesSlice = never;
+type NavigationDocumentDataNavLinksSlice = NavLinksSlice;
+
+/**
+ * Item in *Navigation → Buttons*
+ */
+export interface NavigationDocumentDataButtonsItem {
+  /**
+   * Button Text field in *Navigation → Buttons*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Button text
+   * - **API ID Path**: navigation.buttons[].button_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  button_text: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *Navigation → Buttons*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.buttons[].button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Button Variant field in *Navigation → Buttons*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Primary
+   * - **API ID Path**: navigation.buttons[].button_variant
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  button_variant: prismic.SelectField<"Primary" | "Secondary", "filled">;
+}
+
+/**
+ * Content for Navigation documents
+ */
+interface NavigationDocumentData {
+  /**
+   * Logo Image field in *Navigation*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.logo_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  logo_image: prismic.ImageField<never>;
+
+  /**
+   * Logo Link field in *Navigation*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.logo_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  logo_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Navigation Links field in *Navigation*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.nav_links[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  nav_links: prismic.SliceZone<NavigationDocumentDataNavLinksSlice>;
+
+  /**
+   * Buttons field in *Navigation*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.buttons[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  buttons: prismic.GroupField<Simplify<NavigationDocumentDataButtonsItem>>;
+}
+
+/**
+ * Navigation document from Prismic
+ *
+ * - **API ID**: `navigation`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavigationDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<NavigationDocumentData>,
+    "navigation",
+    Lang
+  >;
+
+type PageDocumentDataSlicesSlice =
+  | ProductListSlice
+  | MediaSlice
+  | EditorialContentSlice
+  | ImageGallerySlice
+  | CallToActionSlice
+  | FeaturedContentSlice
+  | HeaderSlice;
 
 /**
  * Content for Page documents
@@ -359,8 +582,10 @@ export type PageCategoryDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | ArticleDocument
+  | ArticleAuthorDocument
   | ArticleCategoryDocument
   | HomeDocument
+  | NavigationDocument
   | PageDocument
   | PageCategoryDocument;
 
@@ -1200,6 +1425,16 @@ export interface EditorialContentSliceTwoColsWithFullSizeImagePrimary {
   description: prismic.RichTextField;
 
   /**
+   * Content field in *EditorialContent → Two Cols With Full Size Image → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsWithFullSizeImage.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+
+  /**
    * Buttons field in *EditorialContent → Two Cols With Full Size Image → Primary*
    *
    * - **Field Type**: Link
@@ -1353,6 +1588,16 @@ export interface EditorialContentSliceTwoColsImageAndTextPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/boolean
    */
   image_left: prismic.BooleanField;
+
+  /**
+   * Content field in *EditorialContent → Two Cols Image and Text → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: editorial_content.twoColsImageAndText.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
 }
 
 /**
@@ -2381,6 +2626,111 @@ type MediaSliceVariation = MediaSliceDefault | MediaSliceVideo;
 export type MediaSlice = prismic.SharedSlice<"media", MediaSliceVariation>;
 
 /**
+ * Primary content in *NavLinks → Regular → Primary*
+ */
+export interface NavLinksSliceDefaultPrimary {
+  /**
+   * Title field in *NavLinks → Regular → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Link title
+   * - **API ID Path**: nav_links.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Link field in *NavLinks → Regular → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: nav_links.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Regular variation for NavLinks Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Regular navigation link without submenu
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type NavLinksSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<NavLinksSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *NavLinks → With Submenu → Primary*
+ */
+export interface NavLinksSliceWithSubmenuPrimary {
+  /**
+   * Title field in *NavLinks → With Submenu → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Link title
+   * - **API ID Path**: nav_links.withSubmenu.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Link field in *NavLinks → With Submenu → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: nav_links.withSubmenu.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Submenu Links field in *NavLinks → With Submenu → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: nav_links.withSubmenu.primary.submenu_links
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  submenu_links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * With Submenu variation for NavLinks Slice
+ *
+ * - **API ID**: `withSubmenu`
+ * - **Description**: Navigation link with submenu items
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type NavLinksSliceWithSubmenu = prismic.SharedSliceVariation<
+  "withSubmenu",
+  Simplify<NavLinksSliceWithSubmenuPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *NavLinks*
+ */
+type NavLinksSliceVariation = NavLinksSliceDefault | NavLinksSliceWithSubmenu;
+
+/**
+ * NavLinks Shared Slice
+ *
+ * - **API ID**: `nav_links`
+ * - **Description**: Navigation links with optional submenu support
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type NavLinksSlice = prismic.SharedSlice<
+  "nav_links",
+  NavLinksSliceVariation
+>;
+
+/**
  * Item in *ProductList → Carousel 4 Cols → Primary → Products*
  */
 export interface ProductListSliceDefaultPrimaryProductsItem {
@@ -2789,11 +3139,17 @@ declare module "@prismicio/client" {
       ArticleDocument,
       ArticleDocumentData,
       ArticleDocumentDataSlicesSlice,
+      ArticleAuthorDocument,
+      ArticleAuthorDocumentData,
       ArticleCategoryDocument,
       ArticleCategoryDocumentData,
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
+      NavigationDocument,
+      NavigationDocumentData,
+      NavigationDocumentDataNavLinksSlice,
+      NavigationDocumentDataButtonsItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
@@ -2869,6 +3225,12 @@ declare module "@prismicio/client" {
       MediaSliceVariation,
       MediaSliceDefault,
       MediaSliceVideo,
+      NavLinksSlice,
+      NavLinksSliceDefaultPrimary,
+      NavLinksSliceWithSubmenuPrimary,
+      NavLinksSliceVariation,
+      NavLinksSliceDefault,
+      NavLinksSliceWithSubmenu,
       ProductListSlice,
       ProductListSliceDefaultPrimaryProductsItem,
       ProductListSliceDefaultPrimary,

@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Inter } from "next/font/google";
+import { PrismicPreview } from "@prismicio/next";
+import { repositoryName } from "@/prismicio";
+import { NavigationWrapper } from "@/components/NavigationWrapper";
 import "./globals.css";
 
 
@@ -31,6 +35,7 @@ export default function RootLayout({
       className={`h-full antialiased ${rationalDisplay.variable} ${satoshi.variable}`}
     >
       <body className="min-h-full flex flex-col font-body">
+        <NavigationWrapper />
         {children}
       </body>
     </html>

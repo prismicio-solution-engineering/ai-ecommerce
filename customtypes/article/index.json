@@ -12,6 +12,23 @@
           "label": "UID"
         }
       },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading1"
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
       "category": {
         "type": "Link",
         "config": {
@@ -26,11 +43,42 @@
           ]
         }
       },
+      "author": {
+        "type": "Link",
+        "config": {
+          "label": "Author",
+          "select": "document",
+          "repeat": false,
+          "customtypes": [
+            {
+              "id": "article_author",
+              "fields": ["author_name", "author_picture"]
+            }
+          ]
+        }
+      },
+      "publication_date": {
+        "type": "Date",
+        "config": {
+          "label": "Publication date",
+          "placeholder": ""
+        }
+      },
+      "reading_time_estimation": {
+        "type": "Number",
+        "config": {
+          "label": "Reading time estimation (minutes)",
+          "placeholder": ""
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "header": {
+              "type": "SharedSlice"
+            },
             "call_to_action": {
               "type": "SharedSlice"
             },

@@ -1,0 +1,70 @@
+{
+  "id": "nav_links",
+  "type": "SharedSlice",
+  "name": "NavLinks",
+  "description": "Navigation links with optional submenu support",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Regular",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Regular navigation link without submenu",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Link title"
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "",
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "withSubmenu",
+      "name": "With Submenu",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Navigation link with submenu items",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Link title"
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "select": null
+          }
+        },
+        "submenu_links": {
+          "type": "Link",
+          "config": {
+            "label": "Submenu Links",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
