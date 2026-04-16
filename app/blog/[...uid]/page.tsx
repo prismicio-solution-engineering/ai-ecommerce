@@ -13,7 +13,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { uid } = await params;
   const client = createClient();
-  const article = await client.getByUID("article", uid).catch(() => null);
+  const article = await client
+    .getByUID("article", uid[uid.length - 1])
+    .catch(() => null);
 
   if (!article) return {};
 
@@ -30,7 +32,10 @@ export default async function ArticlePage({
 }) {
   const { uid } = await params;
   const client = createClient();
-  const article = await client.getByUID("article", uid).catch(() => notFound());
+  const article = await client
+    .getByUID("article", uid[uid.length - 1])
+    .catch(() => notFound());
+
   return <SliceZone slices={article.data.slices} components={components} />;
 }
 
