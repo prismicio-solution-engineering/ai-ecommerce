@@ -19,9 +19,9 @@ const ImageGallery: FC<ImageGalleryProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="px-[5%] py-16 md:py-24 lg:py-28"
+      className="px-[5%] py-8 md:py-12 lg:py-16"
     >
-      <div className="container">
+      <div className="mx-auto max-w-5xl">
         <div className="mb-12 text-center md:mb-18 lg:mb-20">
           <RichText field={heading} />
           <RichText
@@ -38,14 +38,14 @@ const ImageGallery: FC<ImageGalleryProps> = ({ slice }) => {
             const imageEl = (
               <PrismicNextImage
                 field={item.image}
-                className="size-full object-cover"
+                className="size-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
               />
             );
 
             return (
               <figure key={index}>
                 {isFilled.link(item.link) ? (
-                  <PrismicNextLink field={item.link}>
+                  <PrismicNextLink field={item.link} className="block transition-transform duration-300 hover:scale-101">
                     {imageEl}
                   </PrismicNextLink>
                 ) : (

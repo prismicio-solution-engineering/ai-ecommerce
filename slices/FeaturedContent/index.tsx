@@ -20,11 +20,11 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
+        className="overflow-hidden px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           {/* Header row */}
-          <div className="mb-12 grid grid-cols-1 items-start justify-start gap-y-8 md:mb-18 md:grid-cols-[1fr_max-content] md:items-end md:justify-between md:gap-x-12 md:gap-y-4 lg:mb-20 lg:gap-x-20">
+          <div className="mb-12 grid grid-cols-1 items-start justify-start gap-y-8 md:grid-cols-[1fr_max-content] md:items-end md:justify-between md:gap-x-12 md:gap-y-4 lg:gap-x-20">
             <div className="md:mr-12 lg:mr-0">
               <div className="w-full max-w-lg">
                 {tagline && (
@@ -51,20 +51,21 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
             {cards.map((card, index) => (
               <div
                 key={index}
-                className="flex min-w-[80%] flex-col border border-[var(--color-border)] sm:min-w-[60%] md:min-w-0"
+                className="flex min-w-[80%] flex-col border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary) overflow-hidden sm:min-w-[60%] md:min-w-0"
               >
                 {isFilled.image(card.image) && (
-                  <div className="w-full overflow-hidden">
+                  <div className="relative w-full overflow-hidden bg-white -mb-[1px]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent via-50% to-transparent" />
                     <PrismicNextImage
                       field={card.image}
-                      className="aspect-[3/2] size-full object-cover"
+                      className="aspect-[3/2] size-full object-cover block"
                     />
                   </div>
                 )}
                 <div className="flex w-full flex-1 flex-col justify-between p-5 sm:p-6">
                   <div className="mb-3 flex items-center gap-4 md:mb-4">
                     {card.category && (
-                      <p className="bg-[var(--color-surface)] px-2 py-1 text-sm font-semibold text-[var(--color-text-primary)]">
+                      <p className="bg-[var(--color-surface)] rounded-lg px-2 py-1 text-sm font-semibold text-[var(--color-text-primary)]">
                         {card.category}
                       </p>
                     )}
@@ -90,11 +91,14 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
                       additionalClassNames="text-[var(--color-text-secondary)]"
                     />
                     {isFilled.link(card.link) && (
-                      <div className="mt-5 md:mt-6">
+                      <div className="mt-5 md:mt-6 flex items-center gap-2">
                         <PrismicNextLink
                           field={card.link}
                           className="font-semibold text-[var(--brand-primary)]"
                         />
+                        <div className="text-[var(--brand-primary)]">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -121,9 +125,9 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="overflow-hidden px-[5%] py-16 md:py-24 lg:py-28"
+        className="overflow-hidden px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-12 grid grid-cols-1 items-start justify-start gap-y-8 md:mb-18 md:grid-cols-[1fr_max-content] md:items-end md:justify-between md:gap-x-12 md:gap-y-4 lg:mb-20 lg:gap-x-20">
             <div className="md:mr-12 lg:mr-0">
               <div className="w-full max-w-lg">
@@ -153,12 +157,15 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
                 <PrismicNextLink
                   key={index}
                   field={item.article}
-                  className="flex min-w-[80%] flex-col border border-[var(--color-border)] sm:min-w-[60%] md:min-w-0"
+                  className="flex min-w-[80%] flex-col border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary) sm:min-w-[60%] md:min-w-0"
                 >
-                  <div className="flex w-full flex-1 flex-col justify-center p-5 sm:p-6">
+                  <div className="flex flex-row justify-start items-center gap-2 w-full flex-1 flex-col justify-center p-5 sm:p-6">
                     <p className="text-lg font-bold text-[var(--color-text-primary)]">
                       {item.article.text || "Read more"}
                     </p>
+                    <div className="text-[var(--color-text-primary)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg>
+                    </div>
                   </div>
                 </PrismicNextLink>
               );
@@ -194,9 +201,9 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-12 md:mb-18 lg:mb-20">
             <div className="mx-auto max-w-lg text-center">
               {tagline && (
@@ -213,7 +220,7 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
           </div>
           <div className={`grid justify-center gap-6 md:gap-8 ${gridCols}`}>
             {cards.map((card, index) => (
-              <div key={index} className="relative p-6 md:p-8">
+              <div key={index} className="relative p-6 md:p-8 border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)  overflow-hidden">
                 <div className="absolute inset-0 z-0">
                   <div className="absolute inset-0 bg-[var(--color-overlay)]" />
                   {isFilled.image(card.image) && (
@@ -250,11 +257,14 @@ const FeaturedContent: FC<FeaturedContentProps> = ({ slice }) => {
                     }}
                   />
                   {isFilled.link(card.link) && (
-                    <div className="mt-5 flex items-center md:mt-6">
+                    <div className="mt-5 flex items-center  gap-2 md:mt-6">
                       <PrismicNextLink
                         field={card.link}
                         className="font-semibold text-[var(--color-text-alternative)]"
                       />
+                      <div className="text-[var(--color-text-alternative)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg>
+                      </div>
                     </div>
                   )}
                 </div>

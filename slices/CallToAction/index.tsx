@@ -49,18 +49,18 @@ function TwoColsFullSize({
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="grid grid-cols-1 items-center gap-y-16 pt-16 md:pt-24 lg:grid-cols-2 lg:pt-0"
+      className="grid grid-cols-1 items-center lg:grid-cols-2 lg:pt-0"
     >
       {imageLeft ? (
         <>
           {imageBlock}
-          <div className="mx-[5%] sm:max-w-md md:justify-self-start lg:ml-20 lg:mr-[5vw]">
+          <div className="w-full box-border px-[5%] py-[10%] lg:max-w-xl md:justify-self-start lg:px-20">
             {textContent}
           </div>
         </>
       ) : (
         <>
-          <div className="mx-[5%] sm:max-w-md md:justify-self-start lg:ml-[5vw] lg:mr-20 lg:justify-self-end">
+          <div className="w-full box-border px-[5%] py-[10%] lg:max-w-xl md:justify-self-start lg:px-20">
             {textContent}
           </div>
           {imageBlock}
@@ -76,14 +76,14 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
   // Helper: alternative text components for overlay variations
   const altHeading = {
     heading2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="mb-5 text-5xl font-bold text-[var(--color-text-alternative)] md:mb-6 md:text-7xl lg:text-8xl">
+      <h2 className="mb-5 text-3xl font-bold text-[var(--color-text-alternative)] md:mb-6 md:text-4xl lg:text-5xl">
         {children}
       </h2>
     ),
   };
   const altParagraph = {
     paragraph: ({ children }: { children: React.ReactNode }) => (
-      <p className="text-[var(--color-text-alternative)] md:text-md">
+      <p className="text-[var(--color-text-alternative)] md:text-[18px]">
         {children}
       </p>
     ),
@@ -96,18 +96,20 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className={`container max-w-lg ${center ? "text-center" : ""}`}>
-          <RichText field={heading} />
-          <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
-          {isFilled.repeatable(slice.primary.buttons) && (
-            <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "items-center justify-center" : ""}`}>
-              {slice.primary.buttons.map((link, i) => (
-                <Button key={i} field={link} />
-              ))}
-            </div>
-          )}
+        <div className={`w-full flex ${center ? "justify-center" : ""}`}>
+          <div className={`container max-w-lg ${center ? "text-center" : ""}`}>
+            <RichText field={heading} />
+            <RichText field={description} additionalClassNames="text-[var(--color-text-secondary)]" />
+            {isFilled.repeatable(slice.primary.buttons) && (
+              <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "items-center justify-center" : ""}`}>
+                {slice.primary.buttons.map((link, i) => (
+                  <Button key={i} field={link} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </section>
     );
@@ -120,16 +122,16 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="relative px-[5%] py-16 md:py-24 lg:py-28"
+        className="relative px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className={`container relative z-10 ${center ? "flex flex-col items-center text-center" : ""}`}>
+        <div className={`relative z-10 ${center ? "flex flex-col items-center text-center" : ""}`}>
           <div className="w-full max-w-lg">
             <RichText field={heading} components={altHeading} />
             <RichText field={description} components={altParagraph} />
             {isFilled.repeatable(slice.primary.buttons) && (
               <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "justify-center" : ""}`}>
                 {slice.primary.buttons.map((link, i) => (
-                  <Button key={i} field={link} />
+                  <Button key={i} field={link} alternative />
                 ))}
               </div>
             )}
@@ -153,12 +155,12 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
+        style={bgColor ? { backgroundColor: bgColor } : undefined}
       >
-        <div className="container relative">
+        <div className="relative">
           <div
-            className={`relative z-10 flex flex-col p-8 md:p-12 lg:p-16 ${center ? "items-center text-center" : ""}`}
-            style={bgColor ? { backgroundColor: bgColor } : undefined}
+            className={`relative z-10 flex flex-col ${center ? "items-center text-center" : ""}`}
           >
             <div className="max-w-lg">
               <RichText field={heading} components={altHeading} />
@@ -167,7 +169,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
             {isFilled.repeatable(slice.primary.buttons) && (
               <div className={`mt-6 flex flex-wrap gap-4 md:mt-8 ${center ? "items-center justify-center" : ""}`}>
                 {slice.primary.buttons.map((link, i) => (
-                  <Button key={i} field={link} />
+                  <Button key={i} field={link} alternative />
                 ))}
               </div>
             )}
@@ -183,16 +185,16 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="container grid w-full grid-cols-1 items-start justify-between gap-6 md:grid-cols-[1fr_max-content] md:gap-x-12 md:gap-y-8 lg:gap-x-20">
+        <div className="mx-auto max-w-5xl grid w-full grid-cols-1 items-start justify-between gap-6 md:grid-cols-[1fr_max-content] md:gap-x-12 md:gap-y-8 lg:gap-x-20">
           <div className="md:mr-12 lg:mr-0">
             <div className="w-full max-w-lg">
               <RichText
                 field={heading}
                 components={{
                   heading2: ({ children }) => (
-                    <h2 className="mb-3 text-4xl font-bold leading-[1.2] text-[var(--color-text-primary)] md:mb-4 md:text-5xl lg:text-6xl">
+                    <h2 className="mb-5 text-3xl font-bold text-[var(--color-text-primary)] md:mb-6 md:text-4xl lg:text-5xl">
                       {children}
                     </h2>
                   ),
@@ -220,9 +222,9 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="container">
+        <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-1 gap-x-20 gap-y-12 md:gap-y-16 lg:grid-cols-2 lg:items-center">
             <div className={imageLeft ? "order-2" : "order-1"}>
               <RichText field={heading} />
@@ -237,7 +239,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
             </div>
             {isFilled.image(slice.primary.image) && (
               <div className={imageLeft ? "order-1" : "order-2"}>
-                <PrismicNextImage field={slice.primary.image} className="w-full object-cover" />
+                <PrismicNextImage field={slice.primary.image} className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)" />
               </div>
             )}
           </div>

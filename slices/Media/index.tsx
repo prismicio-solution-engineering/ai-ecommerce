@@ -14,31 +14,29 @@ const Media: FC<MediaProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="container">
-          <div className="mx-auto max-w-lg">
-            <figure>
-              <PrismicNextImage
-                field={slice.primary.image}
-                className="w-full object-cover"
-              />
-              {isFilled.richText(slice.primary.caption) && (
-                <figcaption className="mt-3 text-center">
-                  <RichText
-                    field={slice.primary.caption}
-                    components={{
-                      paragraph: ({ children }) => (
-                        <p className="text-sm text-[var(--color-text-secondary)]">
-                          {children}
-                        </p>
-                      ),
-                    }}
-                  />
-                </figcaption>
-              )}
-            </figure>
-          </div>
+        <div className="mx-auto max-w-5xl">
+          <figure>
+            <PrismicNextImage
+              field={slice.primary.image}
+              className="w-full object-cover border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
+            />
+            {isFilled.richText(slice.primary.caption) && (
+              <figcaption className="mt-3 text-center">
+                <RichText
+                  field={slice.primary.caption}
+                  components={{
+                    paragraph: ({ children }) => (
+                      <p className="text-sm text-[var(--color-text-secondary)]">
+                        {children}
+                      </p>
+                    ),
+                  }}
+                />
+              </figcaption>
+            )}
+          </figure>
         </div>
       </section>
     );
@@ -52,31 +50,29 @@ const Media: FC<MediaProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="px-[5%] py-16 md:py-24 lg:py-28"
+        className="px-[5%] py-8 md:py-12 lg:py-16"
       >
-        <div className="container">
-          <div className="mx-auto max-w-lg">
-            <figure>
-              <div
-                className="aspect-video w-full overflow-hidden"
-                dangerouslySetInnerHTML={{ __html: embed.html ?? "" }}
-              />
-              {isFilled.richText(slice.primary.caption) && (
-                <figcaption className="mt-3 text-center">
-                  <RichText
-                    field={slice.primary.caption}
-                    components={{
-                      paragraph: ({ children }) => (
-                        <p className="text-sm text-[var(--color-text-secondary)]">
-                          {children}
-                        </p>
-                      ),
-                    }}
-                  />
-                </figcaption>
-              )}
-            </figure>
-          </div>
+        <div className="mx-auto max-w-5xl">
+          <figure>
+            <div
+              className="aspect-video w-full overflow-hidden [&>iframe]:size-full border-2 border-[var(--color-border)] rounded-xl shadow-(--shadow-primary)"
+              dangerouslySetInnerHTML={{ __html: embed.html ?? "" }}
+            />
+            {isFilled.richText(slice.primary.caption) && (
+              <figcaption className="mt-3 text-center">
+                <RichText
+                  field={slice.primary.caption}
+                  components={{
+                    paragraph: ({ children }) => (
+                      <p className="text-sm text-[var(--color-text-secondary)]">
+                        {children}
+                      </p>
+                    ),
+                  }}
+                />
+              </figcaption>
+            )}
+          </figure>
         </div>
       </section>
     );

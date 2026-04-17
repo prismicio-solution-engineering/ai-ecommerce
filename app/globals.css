@@ -7,19 +7,24 @@
   --brand-accent: #8b5cf6;
 
   /* Typography */
-  --font-heading: 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif; */
+  --font-heading: var(--font-rational);
+  --font-body: var(--font-satoshi);
 
   /* Backgrounds */
   --color-background: #ffffff;
-  --color-surface: #f9fafb;
+  --color-surface: #eeeeee;
 
   /* Text */
   --color-text-primary: #171717;
   --color-text-secondary: #6b7280;
 
   /* Borders */
-  --color-border: #e5e7eb;
+  --color-border: #151515;
+
+  /* Shadow */
+  --shadow-primary: 0px 12px 16px -4px #00000019;
 
   /* Buttons */
   --color-button-primary-bg: var(--brand-primary);
@@ -43,7 +48,7 @@
   --radius: 0.5rem;                 /* rounded-lg */
 
   /* Overlay */
-  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-overlay: rgba(0, 0, 0, 0.6);
 
   /* Text on overlay / background images */
   --color-text-alternative: #ffffff;
@@ -61,8 +66,10 @@ body {
   background: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-body);
+  letter-spacing: -1%;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+  letter-spacing: -3%;
 }
