@@ -12,19 +12,13 @@
       "description": "Regular navigation link without submenu",
       "imageUrl": "",
       "primary": {
-        "title": {
-          "type": "Text",
-          "config": {
-            "label": "Title",
-            "placeholder": "Link title"
-          }
-        },
         "link": {
           "type": "Link",
           "config": {
             "label": "Link",
             "placeholder": "",
-            "select": null
+            "select": null,
+            "allowText": true
           }
         }
       },
@@ -38,18 +32,15 @@
       "description": "Navigation link with submenu items",
       "imageUrl": "",
       "primary": {
-        "title": {
-          "type": "Text",
-          "config": {
-            "label": "Title",
-            "placeholder": "Link title"
-          }
-        },
         "link": {
           "type": "Link",
           "config": {
             "label": "Link",
-            "select": null
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
           }
         },
         "submenu_links": {
