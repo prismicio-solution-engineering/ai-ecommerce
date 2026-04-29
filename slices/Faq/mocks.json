@@ -47,7 +47,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Standard orders arrive within 3–5 business days. Express shipping is available at checkout for next-day delivery in most regions."
+												"text": "Incididunt qui do ad do ex deserunt anim."
 											}
 										}
 									]
@@ -74,7 +74,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "We accept returns within 30 days of delivery for unworn items in original condition. Refunds are issued to the original payment method within 5 business days."
+												"text": "Proident reprehenderit commodo labore velit quis velit eiusmod cupidatat."
 											}
 										}
 									]
@@ -101,7 +101,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Yes — we ship to over 60 countries worldwide. Duties and taxes are calculated at checkout based on your destination."
+												"text": "Ad ea reprehenderit esse adipisicing velit enim nisi sint labore nostrud aute."
 											}
 										}
 									]
@@ -128,7 +128,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Once your order ships, you'll receive an email with a tracking link. You can also view real-time status from your account dashboard."
+												"text": "Proident do enim ad."
 											}
 										}
 									]
@@ -155,7 +155,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Digital gift cards are available in denominations from $25 to $500 and are delivered by email within minutes of purchase."
+												"text": "Duis est excepteur consectetur non sit ut."
 											}
 										}
 									]
@@ -166,8 +166,8 @@
 				]
 			},
 			"button": {
-				"__TYPE__": "LinkContent",
 				"key": "ece993aa-489e-4444-a8bb-6caaa59ab121",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "AnyLink",
 					"kind": "any",
