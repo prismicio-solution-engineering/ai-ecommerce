@@ -1,0 +1,86 @@
+{
+  "id": "faq",
+  "type": "SharedSlice",
+  "name": "Faq",
+  "description": "FAQ section with a list of questions/answers and a contact footer",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Centered FAQ list with heading, description, expandable questions, and a contact footer",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "single": "heading2",
+            "placeholder": "FAQs"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter description"
+          }
+        },
+        "questions": {
+          "type": "Group",
+          "config": {
+            "label": "Questions",
+            "fields": {
+              "question": {
+                "type": "Text",
+                "config": {
+                  "label": "Question",
+                  "placeholder": "Enter question"
+                }
+              },
+              "answer": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Answer",
+                  "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item",
+                  "placeholder": "Enter answer"
+                }
+              }
+            }
+          }
+        },
+        "footer_heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Footer Heading",
+            "single": "heading4",
+            "placeholder": "Still have questions?"
+          }
+        },
+        "footer_description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Footer Description",
+            "single": "paragraph,strong,em,hyperlink",
+            "placeholder": "Enter footer description"
+          }
+        },
+        "button": {
+          "type": "Link",
+          "config": {
+            "label": "Button",
+            "allowText": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ],
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

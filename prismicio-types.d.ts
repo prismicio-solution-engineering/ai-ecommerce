@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type ArticleDocumentDataSlicesSlice =
+  | FaqSlice
   | HeaderSlice
   | CallToActionSlice
   | FeaturedContentSlice
@@ -287,6 +288,8 @@ export type ArticleCategoryDocument<Lang extends string = string> =
   >;
 
 type HomeDocumentDataSlicesSlice =
+  | ImageGallerySlice
+  | FaqSlice
   | FeaturedContentSlice
   | ProductListSlice
   | EditorialContentSlice
@@ -434,6 +437,7 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | FaqSlice
   | ProductListSlice
   | MediaSlice
   | EditorialContentSlice
@@ -1601,6 +1605,129 @@ export type EditorialContentSlice = prismic.SharedSlice<
   "editorial_content",
   EditorialContentSliceVariation
 >;
+
+/**
+ * Item in *Faq → Default → Primary → Questions*
+ */
+export interface FaqSliceDefaultPrimaryQuestionsItem {
+  /**
+   * Question field in *Faq → Default → Primary → Questions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter question
+   * - **API ID Path**: faq.default.primary.questions[].question
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *Faq → Default → Primary → Questions*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter answer
+   * - **API ID Path**: faq.default.primary.questions[].answer
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Faq → Default → Primary*
+ */
+export interface FaqSliceDefaultPrimary {
+  /**
+   * Heading field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: FAQs
+   * - **API ID Path**: faq.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Description field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter description
+   * - **API ID Path**: faq.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Questions field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.questions[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  questions: prismic.GroupField<Simplify<FaqSliceDefaultPrimaryQuestionsItem>>;
+
+  /**
+   * Footer Heading field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Still have questions?
+   * - **API ID Path**: faq.default.primary.footer_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  footer_heading: prismic.RichTextField;
+
+  /**
+   * Footer Description field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter footer description
+   * - **API ID Path**: faq.default.primary.footer_description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  footer_description: prismic.RichTextField;
+
+  /**
+   * Button field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.button
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    "Primary" | "Secondary"
+  >;
+}
+
+/**
+ * Default variation for Faq Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Centered FAQ list with heading, description, expandable questions, and a contact footer
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FaqSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FaqSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Faq*
+ */
+type FaqSliceVariation = FaqSliceDefault;
+
+/**
+ * Faq Shared Slice
+ *
+ * - **API ID**: `faq`
+ * - **Description**: FAQ section with a list of questions/answers and a contact footer
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FaqSlice = prismic.SharedSlice<"faq", FaqSliceVariation>;
 
 /**
  * Item in *FeaturedContent → Default → Primary → Cards*
@@ -3133,6 +3260,11 @@ declare module "@prismicio/client" {
       EditorialContentSliceTwoColsWithFullSizeImage,
       EditorialContentSliceQuote,
       EditorialContentSliceTwoColsImageAndText,
+      FaqSlice,
+      FaqSliceDefaultPrimaryQuestionsItem,
+      FaqSliceDefaultPrimary,
+      FaqSliceVariation,
+      FaqSliceDefault,
       FeaturedContentSlice,
       FeaturedContentSliceDefaultPrimaryCardsItem,
       FeaturedContentSliceDefaultPrimary,
